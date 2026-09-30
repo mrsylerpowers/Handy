@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "通用",
+    "transcribeFile": "转录文件",
     "models": "模型",
     "advanced": "高级",
     "postProcessing": "后处理",
@@ -469,6 +470,35 @@
       "retranscribeError": "重新转录失败。请重试。",
       "transcribing": "转录中...",
       "transcriptionFailed": "转录失败。您可以使用重试图标重新转录。"
+    },
+    "transcribeFile": {
+      "title": "转录文件",
+      "description": "使用所选模型（{{model}}）将音频或视频文件转换为文字。",
+      "descriptionNoModel": "请在“模型”页面下载转录模型以转录文件。",
+      "dropHere": "将音频或视频文件拖放到此处",
+      "chooseFile": "选择文件...",
+      "audioFilterName": "音频和视频文件",
+      "reading": "正在读取文件...",
+      "progress": "已转录 {{completed}}/{{total}} 个片段",
+      "cancel": "取消",
+      "cancelling": "正在取消...",
+      "cancelled": "转录已取消。",
+      "failedTitle": "无法转录 {{file}}",
+      "transcript": "转录文本",
+      "noSpeech": "此文件中未检测到语音。",
+      "copied": "已复制",
+      "save": "保存为 .txt",
+      "textFilterName": "文本文件",
+      "saved": "转录文本已保存",
+      "saveFailed": "无法保存转录文本",
+      "dictationBlockedTitle": "正在转录文件",
+      "dictationBlocked": "在文件转录完成或您取消之前，听写已暂停。",
+      "errors": {
+        "alreadyRunning": "已有文件正在转录。",
+        "recordingInProgress": "请先完成听写，再转录文件。",
+        "noModel": "请先在“模型”页面下载转录模型。",
+        "startFailed": "无法开始转录此文件。"
+      }
     },
     "debug": {
       "title": "调试",

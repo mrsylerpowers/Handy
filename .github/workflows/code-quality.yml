@@ -55,6 +55,9 @@ jobs:
       - name: Test keyboard utilities
         run: bun run test:keyboard
 
+      - name: Test file transcription store
+        run: bun run test:file-transcription
+
       - name: Run ESLint
         run: bun run lint
 

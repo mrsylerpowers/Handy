@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Chung",
+    "transcribeFile": "Phiên âm tệp",
     "models": "Mô hình",
     "advanced": "Nâng cao",
     "postProcessing": "Xử lý sau",
@@ -469,6 +470,35 @@
       "retranscribeError": "Không thể phiên âm lại. Vui lòng thử lại.",
       "transcribing": "Đang phiên âm...",
       "transcriptionFailed": "Phiên âm thất bại. Bạn có thể phiên âm lại bằng biểu tượng thử lại."
+    },
+    "transcribeFile": {
+      "title": "Phiên âm tệp",
+      "description": "Chuyển tệp âm thanh hoặc video thành văn bản bằng mô hình bạn đã chọn ({{model}}).",
+      "descriptionNoModel": "Tải xuống một mô hình phiên âm trong trang Mô hình để phiên âm tệp.",
+      "dropHere": "Thả tệp âm thanh hoặc video vào đây",
+      "chooseFile": "Chọn tệp...",
+      "audioFilterName": "Tệp âm thanh và video",
+      "reading": "Đang đọc tệp...",
+      "progress": "Đã phiên âm {{completed}}/{{total}} đoạn",
+      "cancel": "Hủy",
+      "cancelling": "Đang hủy...",
+      "cancelled": "Đã hủy phiên âm.",
+      "failedTitle": "Không thể phiên âm {{file}}",
+      "transcript": "Bản phiên âm",
+      "noSpeech": "Không tìm thấy giọng nói trong tệp này.",
+      "copied": "Đã sao chép",
+      "save": "Lưu thành .txt",
+      "textFilterName": "Tệp văn bản",
+      "saved": "Đã lưu bản phiên âm",
+      "saveFailed": "Không thể lưu bản phiên âm",
+      "dictationBlockedTitle": "Đang phiên âm tệp",
+      "dictationBlocked": "Tính năng đọc chính tả tạm dừng cho đến khi tệp hoàn tất hoặc bạn hủy.",
+      "errors": {
+        "alreadyRunning": "Đang có một tệp được phiên âm.",
+        "recordingInProgress": "Hãy hoàn tất đọc chính tả trước khi phiên âm tệp.",
+        "noModel": "Hãy tải xuống một mô hình phiên âm trong trang Mô hình trước.",
+        "startFailed": "Không thể bắt đầu phiên âm tệp này."
+      }
     },
     "debug": {
       "title": "Gỡ lỗi",

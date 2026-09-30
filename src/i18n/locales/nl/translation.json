@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Algemeen",
+    "transcribeFile": "Bestand transcriberen",
     "models": "Modellen",
     "advanced": "Geavanceerd",
     "postProcessing": "Naverwerking",
@@ -469,6 +470,35 @@
       "retranscribeError": "Opnieuw transcriberen mislukt. Probeer het opnieuw.",
       "transcribing": "Transcriberen...",
       "transcriptionFailed": "Transcriptie mislukt. Je kunt het opnieuw proberen via het herlaad-pictogram."
+    },
+    "transcribeFile": {
+      "title": "Bestand transcriberen",
+      "description": "Zet een audio- of videobestand om naar tekst met je geselecteerde model ({{model}}).",
+      "descriptionNoModel": "Download een transcriptiemodel op de pagina Modellen om bestanden te transcriberen.",
+      "dropHere": "Sleep hier een audio- of videobestand naartoe",
+      "chooseFile": "Bestand kiezen...",
+      "audioFilterName": "Audio- en videobestanden",
+      "reading": "Bestand lezen...",
+      "progress": "{{completed}} van {{total}} segmenten getranscribeerd",
+      "cancel": "Annuleren",
+      "cancelling": "Bezig met annuleren...",
+      "cancelled": "Transcriptie geannuleerd.",
+      "failedTitle": "Kan {{file}} niet transcriberen",
+      "transcript": "Transcript",
+      "noSpeech": "Er is geen spraak gevonden in dit bestand.",
+      "copied": "Gekopieerd",
+      "save": "Opslaan als .txt",
+      "textFilterName": "Tekstbestanden",
+      "saved": "Transcript opgeslagen",
+      "saveFailed": "Kan het transcript niet opslaan",
+      "dictationBlockedTitle": "Bestandstranscriptie bezig",
+      "dictationBlocked": "Dicteren is gepauzeerd totdat het bestand klaar is of je het annuleert.",
+      "errors": {
+        "alreadyRunning": "Er wordt al een bestand getranscribeerd.",
+        "recordingInProgress": "Rond je dictaat af voordat je een bestand transcribeert.",
+        "noModel": "Download eerst een transcriptiemodel op de pagina Modellen.",
+        "startFailed": "Kan het transcriberen van dit bestand niet starten."
+      }
     },
     "debug": {
       "title": "Probleemoplossing",

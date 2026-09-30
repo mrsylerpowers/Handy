@@ -277,6 +277,10 @@ pub struct TranscriptionManager {
     /// `is_model_loaded()` consults this so the model still reports "loaded"
     /// while the worker holds it.
     active_engine_lease: Arc<AtomicU64>,
+    /// Serializes batch runs. A file transcription runs chunk after chunk from
+    /// its own thread; without this, a dictation finishing mid-chunk would find
+    /// the engine taken out and fail instead of waiting its turn.
+    run_lock: Arc<Mutex<()>>,
 }
 
 impl TranscriptionManager {
@@ -297,6 +301,7 @@ impl TranscriptionManager {
             next_stream_worker_id: Arc::new(AtomicU64::new(1)),
             active_stream_worker: Arc::new(AtomicU64::new(0)),
             active_engine_lease: Arc::new(AtomicU64::new(0)),
+            run_lock: Arc::new(Mutex::new(())),
         };
 
         // Start the idle watcher
@@ -1174,12 +1179,27 @@ impl TranscriptionManager {
     }
 
     pub fn transcribe(&self, audio: Vec<f32>) -> Result<String> {
+        self.run_transcription(audio, true)
+    }
+
+    /// Like [`transcribe`](Self::transcribe), but never unloads the model
+    /// afterwards, even when the unload timeout is "Immediately". For callers
+    /// that transcribe many segments in a row (file transcription): they call
+    /// [`maybe_unload_immediately`](Self::maybe_unload_immediately) once when
+    /// done instead of reloading the model for every segment.
+    pub fn transcribe_segment(&self, audio: Vec<f32>) -> Result<String> {
+        self.run_transcription(audio, false)
+    }
+
+    fn run_transcription(&self, audio: Vec<f32>, unload_when_done: bool) -> Result<String> {
         #[cfg(debug_assertions)]
         if std::env::var("HANDY_FORCE_TRANSCRIPTION_FAILURE").is_ok() {
             return Err(anyhow::anyhow!(
                 "Simulated transcription failure (HANDY_FORCE_TRANSCRIPTION_FAILURE)"
             ));
         }
+
+        let _run_guard = self.run_lock.lock().unwrap_or_else(|e| e.into_inner());
 
         // Update last activity timestamp
         self.touch_activity();
@@ -1191,7 +1211,9 @@ impl TranscriptionManager {
 
         if audio.is_empty() {
             debug!("Empty audio vector");
-            self.maybe_unload_immediately("empty audio");
+            if unload_when_done {
+                self.maybe_unload_immediately("empty audio");
+            }
             return Ok(String::new());
         }
 
@@ -1529,7 +1551,9 @@ impl TranscriptionManager {
             );
         }
 
-        self.maybe_unload_immediately("transcription");
+        if unload_when_done {
+            self.maybe_unload_immediately("transcription");
+        }
 
         Ok(final_result)
     }

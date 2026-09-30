@@ -155,6 +155,10 @@ function App() {
         toast.error(t("errors.noInputDeviceTitle"), {
           description: t("errors.noInputDevice"),
         });
+      } else if (error_type === "file_transcription_in_progress") {
+        toast.info(t("settings.transcribeFile.dictationBlockedTitle"), {
+          description: t("settings.transcribeFile.dictationBlocked"),
+        });
       } else {
         toast.error(
           t("errors.recordingFailed", { error: detail ?? "Unknown error" }),

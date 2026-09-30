@@ -33,6 +33,7 @@ pub use utils::env_flag_enabled;
 
 use env_filter::Builder as EnvFilterBuilder;
 use managers::audio::AudioRecordingManager;
+use managers::file_transcription::FileTranscriptionManager;
 use managers::history::HistoryManager;
 use managers::model::ModelManager;
 use managers::transcription::TranscriptionManager;
@@ -204,6 +205,7 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     );
     let history_manager =
         Arc::new(HistoryManager::new(app_handle).expect("Failed to initialize history manager"));
+    let file_transcription_manager = Arc::new(FileTranscriptionManager::new(app_handle));
 
     // Initialize the transcribe-cpp native backend (logging + backend module
     // registration) once, before any whisper model is loaded.
@@ -217,6 +219,7 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     app_handle.manage(model_manager.clone());
     app_handle.manage(transcription_manager.clone());
     app_handle.manage(history_manager.clone());
+    app_handle.manage(file_transcription_manager);
     app_handle.manage(tray::TrayState::new());
 
     // Note: Shortcuts are NOT initialized here.
@@ -432,6 +435,7 @@ mod headless_guard_tests {
 /// mic, no VAD, no download. Returns a process exit code (0 ok, 1 runtime
 /// failure, 2 bad input/usage).
 fn run_headless_transcription(app: &AppHandle, args: &CliArgs) -> i32 {
+    use crate::audio_toolkit::chunking::{plan_chunks, transcribe_chunks, ChunkedTranscription};
     use std::time::Instant;
 
     // --list-devices: print registered compute devices (with indices) and exit.
@@ -492,41 +496,20 @@ fn run_headless_transcription(app: &AppHandle, args: &CliArgs) -> i32 {
         }
     }
 
-    let Some(wav) = args.transcribe_file.clone() else {
+    let Some(file) = args.transcribe_file.clone() else {
         return 0;
     };
 
-    // read_wav_samples reads 16-bit int samples and does no validation; the app
-    // only ever saves 16 kHz mono 16-bit PCM, so reject anything else rather than
-    // transcribe garbage / mis-time / mis-decode.
-    match hound::WavReader::open(&wav) {
-        Ok(reader) => {
-            let spec = reader.spec();
-            if spec.sample_rate != 16_000
-                || spec.channels != 1
-                || spec.bits_per_sample != 16
-                || spec.sample_format != hound::SampleFormat::Int
-            {
-                eprintln!(
-                    "error: expected 16 kHz mono 16-bit PCM WAV, got {} Hz / {} ch / {}-bit {:?}",
-                    spec.sample_rate, spec.channels, spec.bits_per_sample, spec.sample_format
-                );
-                return 2;
-            }
-        }
-        Err(e) => {
-            eprintln!("error: cannot open {}: {}", wav.display(), e);
-            return 2;
-        }
-    }
-
-    let samples = match crate::audio_toolkit::read_wav_samples(&wav) {
+    // Any format the "Transcribe File" page accepts, decoded to 16 kHz mono and
+    // split into the same chunks.
+    let samples = match crate::audio_toolkit::decode_audio_file(&file) {
         Ok(s) => s,
         Err(e) => {
-            eprintln!("error: failed to read {}: {}", wav.display(), e);
+            eprintln!("error: failed to read {}: {:#}", file.display(), e);
             return 2;
         }
     };
+    let chunks = plan_chunks(&samples);
     let audio_secs = samples.len() as f64 / 16_000.0;
 
     let tm = app.state::<Arc<TranscriptionManager>>();
@@ -562,9 +545,9 @@ fn run_headless_transcription(app: &AppHandle, args: &CliArgs) -> i32 {
     let mut times_ms: Vec<u64> = Vec::new();
     let mut text = String::new();
     for i in 0..runs {
-        // If the model's unload-timeout is "Immediately", transcribe() unloads
-        // the engine after each run; reload (untimed) so repeats keep working
-        // and the inference timing below stays clean.
+        // transcribe_segment() never unloads the model, but reload (untimed) if
+        // it went away anyway so repeats keep working and the inference timing
+        // below stays clean.
         if !tm.is_model_loaded() {
             if let Err(e) = tm.load_model_with_device(&model_id, device_index) {
                 eprintln!("error: reload before run {} failed: {}", i + 1, e);
@@ -572,10 +555,21 @@ fn run_headless_transcription(app: &AppHandle, args: &CliArgs) -> i32 {
             }
         }
         let t = Instant::now();
-        match tm.transcribe(samples.clone()) {
-            Ok(out) => text = out,
+        let outcome = transcribe_chunks(
+            &samples,
+            &chunks,
+            || false,
+            |chunk| tm.transcribe_segment(chunk.to_vec()),
+            |_, _| {},
+        );
+        match outcome {
+            Ok(ChunkedTranscription::Completed(out)) => text = out,
+            Ok(ChunkedTranscription::Cancelled) => {
+                eprintln!("error: transcription was cancelled");
+                return 1;
+            }
             Err(e) => {
-                eprintln!("error: transcribe failed: {}", e);
+                eprintln!("error: transcribe failed: {:#}", e);
                 return 1;
             }
         }
@@ -763,12 +757,16 @@ pub fn run(cli_args: CliArgs) {
             commands::history::retry_history_entry_transcription,
             commands::history::update_history_limit,
             commands::history::update_recording_retention_period,
+            commands::file_transcription::start_file_transcription,
+            commands::file_transcription::cancel_file_transcription,
+            commands::file_transcription::save_transcript_file,
             helpers::clamshell::is_laptop,
         ])
         .events(collect_events![
             managers::history::HistoryUpdatePayload,
             managers::transcription::StreamTextEvent,
             managers::transcription::StreamPhaseEvent,
+            managers::file_transcription::FileTranscriptionEvent,
         ]);
 
     #[cfg(debug_assertions)] // <- Only export on non-release builds

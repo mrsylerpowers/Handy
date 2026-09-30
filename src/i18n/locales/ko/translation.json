@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "일반",
+    "transcribeFile": "파일 전사",
     "models": "모델",
     "advanced": "고급",
     "postProcessing": "후처리",
@@ -469,6 +470,35 @@
       "retranscribeError": "다시 전사에 실패했습니다. 다시 시도해주세요.",
       "transcribing": "전사 중...",
       "transcriptionFailed": "전사에 실패했습니다. 재시도 아이콘을 사용하여 다시 전사할 수 있습니다."
+    },
+    "transcribeFile": {
+      "title": "파일 전사",
+      "description": "선택한 모델({{model}})로 오디오 또는 비디오 파일을 텍스트로 변환합니다.",
+      "descriptionNoModel": "파일을 전사하려면 모델 페이지에서 전사 모델을 다운로드하세요.",
+      "dropHere": "여기에 오디오 또는 비디오 파일을 끌어다 놓으세요",
+      "chooseFile": "파일 선택...",
+      "audioFilterName": "오디오 및 비디오 파일",
+      "reading": "파일 읽는 중...",
+      "progress": "{{total}}개 구간 중 {{completed}}개 전사 완료",
+      "cancel": "취소",
+      "cancelling": "취소하는 중...",
+      "cancelled": "전사가 취소되었습니다.",
+      "failedTitle": "{{file}} 파일을 전사하지 못했습니다",
+      "transcript": "전사 결과",
+      "noSpeech": "이 파일에서 음성을 찾지 못했습니다.",
+      "copied": "복사됨",
+      "save": ".txt로 저장",
+      "textFilterName": "텍스트 파일",
+      "saved": "전사 결과를 저장했습니다",
+      "saveFailed": "전사 결과를 저장하지 못했습니다",
+      "dictationBlockedTitle": "파일 전사 진행 중",
+      "dictationBlocked": "파일 전사가 끝나거나 취소할 때까지 받아쓰기가 일시 중지됩니다.",
+      "errors": {
+        "alreadyRunning": "이미 파일을 전사하고 있습니다.",
+        "recordingInProgress": "파일을 전사하기 전에 받아쓰기를 끝내세요.",
+        "noModel": "먼저 모델 페이지에서 전사 모델을 다운로드하세요.",
+        "startFailed": "이 파일의 전사를 시작하지 못했습니다."
+      }
     },
     "debug": {
       "title": "디버그",

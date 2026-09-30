@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Allgemein",
+    "transcribeFile": "Datei transkribieren",
     "models": "Modelle",
     "advanced": "Erweitert",
     "postProcessing": "Nachbearbeitung",
@@ -469,6 +470,35 @@
       "retranscribeError": "Erneute Transkription fehlgeschlagen. Bitte versuche es erneut.",
       "transcribing": "Transkribiere...",
       "transcriptionFailed": "Transkription fehlgeschlagen. Du kannst über das Wiederholen-Symbol erneut transkribieren."
+    },
+    "transcribeFile": {
+      "title": "Datei transkribieren",
+      "description": "Wandle eine Audio- oder Videodatei mit deinem ausgewählten Modell ({{model}}) in Text um.",
+      "descriptionNoModel": "Lade unter Modelle ein Transkriptionsmodell herunter, um Dateien zu transkribieren.",
+      "dropHere": "Audio- oder Videodatei hier ablegen",
+      "chooseFile": "Datei auswählen...",
+      "audioFilterName": "Audio- und Videodateien",
+      "reading": "Datei wird gelesen...",
+      "progress": "{{completed}} von {{total}} Abschnitten transkribiert",
+      "cancel": "Abbrechen",
+      "cancelling": "Wird abgebrochen...",
+      "cancelled": "Transkription abgebrochen.",
+      "failedTitle": "{{file}} konnte nicht transkribiert werden",
+      "transcript": "Transkript",
+      "noSpeech": "In dieser Datei wurde keine Sprache gefunden.",
+      "copied": "Kopiert",
+      "save": "Als .txt speichern",
+      "textFilterName": "Textdateien",
+      "saved": "Transkript gespeichert",
+      "saveFailed": "Transkript konnte nicht gespeichert werden",
+      "dictationBlockedTitle": "Dateitranskription läuft",
+      "dictationBlocked": "Das Diktieren ist pausiert, bis die Datei fertig ist oder du abbrichst.",
+      "errors": {
+        "alreadyRunning": "Es wird bereits eine Datei transkribiert.",
+        "recordingInProgress": "Beende dein Diktat, bevor du eine Datei transkribierst.",
+        "noModel": "Lade zuerst unter Modelle ein Transkriptionsmodell herunter.",
+        "startFailed": "Die Transkription dieser Datei konnte nicht gestartet werden."
+      }
     },
     "debug": {
       "title": "Debug",

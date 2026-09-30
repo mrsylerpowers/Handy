@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Ogólne",
+    "transcribeFile": "Transkrybuj plik",
     "models": "Modele",
     "advanced": "Zaawansowane",
     "postProcessing": "Postproces",
@@ -469,6 +470,35 @@
       "retranscribeError": "Nie udało się ponownie transkrybować. Spróbuj ponownie.",
       "transcribing": "Transkrybuję...",
       "transcriptionFailed": "Transkrypcja nie powiodła się. Możesz transkrybować ponownie za pomocą ikony ponowienia."
+    },
+    "transcribeFile": {
+      "title": "Transkrybuj plik",
+      "description": "Zamień plik audio lub wideo na tekst za pomocą wybranego modelu ({{model}}).",
+      "descriptionNoModel": "Pobierz model transkrypcji na stronie Modele, aby transkrybować pliki.",
+      "dropHere": "Upuść tutaj plik audio lub wideo",
+      "chooseFile": "Wybierz plik...",
+      "audioFilterName": "Pliki audio i wideo",
+      "reading": "Wczytywanie pliku...",
+      "progress": "Przetranskrybowano {{completed}} z {{total}} fragmentów",
+      "cancel": "Anuluj",
+      "cancelling": "Anulowanie...",
+      "cancelled": "Transkrypcja anulowana.",
+      "failedTitle": "Nie udało się przetranskrybować pliku {{file}}",
+      "transcript": "Transkrypcja",
+      "noSpeech": "W tym pliku nie wykryto mowy.",
+      "copied": "Skopiowano",
+      "save": "Zapisz jako .txt",
+      "textFilterName": "Pliki tekstowe",
+      "saved": "Transkrypcja zapisana",
+      "saveFailed": "Nie udało się zapisać transkrypcji",
+      "dictationBlockedTitle": "Trwa transkrypcja pliku",
+      "dictationBlocked": "Dyktowanie jest wstrzymane do zakończenia pliku lub jego anulowania.",
+      "errors": {
+        "alreadyRunning": "Plik jest już transkrybowany.",
+        "recordingInProgress": "Zakończ dyktowanie przed transkrypcją pliku.",
+        "noModel": "Najpierw pobierz model transkrypcji na stronie Modele.",
+        "startFailed": "Nie udało się rozpocząć transkrypcji tego pliku."
+      }
     },
     "debug": {
       "title": "Debugowanie",

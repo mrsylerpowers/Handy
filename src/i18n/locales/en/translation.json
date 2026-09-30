@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "General",
+    "transcribeFile": "Transcribe File",
     "models": "Models",
     "advanced": "Advanced",
     "postProcessing": "Post Process",
@@ -469,6 +470,35 @@
       "retranscribeError": "Failed to re-transcribe. Please try again.",
       "transcribing": "Transcribing...",
       "transcriptionFailed": "Transcription failed. You can re-transcribe using the retry icon."
+    },
+    "transcribeFile": {
+      "title": "Transcribe File",
+      "description": "Turn an audio or video file into text with your selected model ({{model}}).",
+      "descriptionNoModel": "Download a transcription model on the Models page to transcribe files.",
+      "dropHere": "Drop an audio or video file here",
+      "chooseFile": "Choose File...",
+      "audioFilterName": "Audio and video files",
+      "reading": "Reading file...",
+      "progress": "Transcribed {{completed}} of {{total}} segments",
+      "cancel": "Cancel",
+      "cancelling": "Cancelling...",
+      "cancelled": "Transcription cancelled.",
+      "failedTitle": "Could not transcribe {{file}}",
+      "transcript": "Transcript",
+      "noSpeech": "No speech was found in this file.",
+      "copied": "Copied",
+      "save": "Save as .txt",
+      "textFilterName": "Text files",
+      "saved": "Transcript saved",
+      "saveFailed": "Could not save the transcript",
+      "dictationBlockedTitle": "File transcription in progress",
+      "dictationBlocked": "Dictation is paused until the file finishes or you cancel it.",
+      "errors": {
+        "alreadyRunning": "A file is already being transcribed.",
+        "recordingInProgress": "Finish your dictation before transcribing a file.",
+        "noModel": "Download a transcription model on the Models page first.",
+        "startFailed": "Could not start transcribing this file."
+      }
     },
     "debug": {
       "title": "Debug",

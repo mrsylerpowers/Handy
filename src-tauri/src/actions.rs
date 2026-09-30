@@ -3,6 +3,7 @@ use crate::apple_intelligence;
 use crate::audio_feedback::{play_feedback_sound, play_feedback_sound_blocking, SoundType};
 use crate::audio_toolkit::{is_microphone_access_denied, is_no_input_device_error, VadPolicy};
 use crate::managers::audio::AudioRecordingManager;
+use crate::managers::file_transcription::FileTranscriptionManager;
 use crate::managers::history::HistoryManager;
 use crate::managers::model::ModelManager;
 use crate::managers::transcription::StreamWorkKind;
@@ -470,6 +471,24 @@ impl ShortcutAction for TranscribeAction {
     fn start(&self, app: &AppHandle, binding_id: &str, _shortcut_str: &str) {
         let start_time = Instant::now();
         debug!("TranscribeAction::start called for binding: {}", binding_id);
+
+        // A file transcription is using the model, taking the engine out for
+        // each chunk; a dictation now would contend with it (and could trigger a
+        // second model load), so refuse and tell the user why.
+        if app
+            .try_state::<Arc<FileTranscriptionManager>>()
+            .is_some_and(|manager| manager.is_running())
+        {
+            warn!("Not starting recording: a file transcription is in progress");
+            let _ = app.emit(
+                "recording-error",
+                RecordingErrorEvent {
+                    error_type: "file_transcription_in_progress".to_string(),
+                    detail: None,
+                },
+            );
+            return;
+        }
 
         // Load model in the background
         let tm = app.state::<Arc<TranscriptionManager>>();

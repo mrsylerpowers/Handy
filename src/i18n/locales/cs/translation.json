@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Obecné",
+    "transcribeFile": "Přepsat soubor",
     "models": "Modely",
     "advanced": "Pokročilé",
     "postProcessing": "Následné zpracování",
@@ -469,6 +470,35 @@
       "retranscribeError": "Opětovný přepis se nezdařil. Zkuste to prosím znovu.",
       "transcribing": "Přepisuji...",
       "transcriptionFailed": "Přepis selhal. Můžete zkusit přepis znovu pomocí ikony opakování."
+    },
+    "transcribeFile": {
+      "title": "Přepsat soubor",
+      "description": "Převeďte zvukový nebo video soubor na text pomocí vybraného modelu ({{model}}).",
+      "descriptionNoModel": "Pro přepis souborů si na stránce Modely stáhněte model pro přepis.",
+      "dropHere": "Sem přetáhněte zvukový nebo video soubor",
+      "chooseFile": "Vybrat soubor...",
+      "audioFilterName": "Zvukové a video soubory",
+      "reading": "Načítám soubor...",
+      "progress": "Přepsáno {{completed}} z {{total}} úseků",
+      "cancel": "Zrušit",
+      "cancelling": "Ruším...",
+      "cancelled": "Přepis byl zrušen.",
+      "failedTitle": "Soubor {{file}} se nepodařilo přepsat",
+      "transcript": "Přepis",
+      "noSpeech": "V tomto souboru nebyla nalezena žádná řeč.",
+      "copied": "Zkopírováno",
+      "save": "Uložit jako .txt",
+      "textFilterName": "Textové soubory",
+      "saved": "Přepis uložen",
+      "saveFailed": "Přepis se nepodařilo uložit",
+      "dictationBlockedTitle": "Probíhá přepis souboru",
+      "dictationBlocked": "Diktování je pozastaveno, dokud se soubor nedokončí nebo ho nezrušíte.",
+      "errors": {
+        "alreadyRunning": "Již se přepisuje jiný soubor.",
+        "recordingInProgress": "Před přepisem souboru dokončete diktování.",
+        "noModel": "Nejprve si na stránce Modely stáhněte model pro přepis.",
+        "startFailed": "Přepis tohoto souboru se nepodařilo spustit."
+      }
     },
     "debug": {
       "title": "Ladění",

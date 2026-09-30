@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Genel",
+    "transcribeFile": "Dosya Transkribe Et",
     "models": "Modeller",
     "advanced": "Gelişmiş",
     "postProcessing": "Son İşlem",
@@ -469,6 +470,35 @@
       "retranscribeError": "Yeniden transkripsiyon başarısız oldu. Lütfen tekrar deneyin.",
       "transcribing": "Transkribe ediliyor...",
       "transcriptionFailed": "Transkripsiyon başarısız oldu. Yeniden deneme simgesini kullanarak tekrar transkribe edebilirsiniz."
+    },
+    "transcribeFile": {
+      "title": "Dosya Transkribe Et",
+      "description": "Bir ses veya video dosyasını seçili modelinizle ({{model}}) metne dönüştürün.",
+      "descriptionNoModel": "Dosyaları transkribe etmek için Modeller sayfasından bir transkripsiyon modeli indirin.",
+      "dropHere": "Bir ses veya video dosyasını buraya bırakın",
+      "chooseFile": "Dosya Seç...",
+      "audioFilterName": "Ses ve video dosyaları",
+      "reading": "Dosya okunuyor...",
+      "progress": "{{total}} bölümden {{completed}} tanesi transkribe edildi",
+      "cancel": "İptal",
+      "cancelling": "İptal ediliyor...",
+      "cancelled": "Transkripsiyon iptal edildi.",
+      "failedTitle": "{{file}} transkribe edilemedi",
+      "transcript": "Transkript",
+      "noSpeech": "Bu dosyada konuşma bulunamadı.",
+      "copied": "Kopyalandı",
+      "save": ".txt olarak kaydet",
+      "textFilterName": "Metin dosyaları",
+      "saved": "Transkript kaydedildi",
+      "saveFailed": "Transkript kaydedilemedi",
+      "dictationBlockedTitle": "Dosya transkripsiyonu sürüyor",
+      "dictationBlocked": "Dosya bitene veya iptal edene kadar dikte duraklatıldı.",
+      "errors": {
+        "alreadyRunning": "Zaten bir dosya transkribe ediliyor.",
+        "recordingInProgress": "Bir dosyayı transkribe etmeden önce diktenizi bitirin.",
+        "noModel": "Önce Modeller sayfasından bir transkripsiyon modeli indirin.",
+        "startFailed": "Bu dosyanın transkripsiyonu başlatılamadı."
+      }
     },
     "debug": {
       "title": "Hata Ayıklama",

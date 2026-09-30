@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Allmänt",
+    "transcribeFile": "Transkribera fil",
     "models": "Modeller",
     "advanced": "Avancerat",
     "postProcessing": "Efterbearbetning",
@@ -469,6 +470,35 @@
       "retranscribeError": "Misslyckades med att transkribera igen. Försök igen.",
       "transcribing": "Transkriberar...",
       "transcriptionFailed": "Transkribering misslyckades. Du kan transkribera igen med hjälp av ikonen för nytt försök."
+    },
+    "transcribeFile": {
+      "title": "Transkribera fil",
+      "description": "Gör om en ljud- eller videofil till text med din valda modell ({{model}}).",
+      "descriptionNoModel": "Ladda ner en transkriptionsmodell på sidan Modeller för att transkribera filer.",
+      "dropHere": "Släpp en ljud- eller videofil här",
+      "chooseFile": "Välj fil...",
+      "audioFilterName": "Ljud- och videofiler",
+      "reading": "Läser fil...",
+      "progress": "{{completed}} av {{total}} segment transkriberade",
+      "cancel": "Avbryt",
+      "cancelling": "Avbryter...",
+      "cancelled": "Transkriptionen avbröts.",
+      "failedTitle": "Det gick inte att transkribera {{file}}",
+      "transcript": "Transkription",
+      "noSpeech": "Inget tal hittades i den här filen.",
+      "copied": "Kopierat",
+      "save": "Spara som .txt",
+      "textFilterName": "Textfiler",
+      "saved": "Transkriptionen sparades",
+      "saveFailed": "Det gick inte att spara transkriptionen",
+      "dictationBlockedTitle": "Filtranskribering pågår",
+      "dictationBlocked": "Dikteringen är pausad tills filen är klar eller du avbryter den.",
+      "errors": {
+        "alreadyRunning": "En fil transkriberas redan.",
+        "recordingInProgress": "Avsluta dikteringen innan du transkriberar en fil.",
+        "noModel": "Ladda först ner en transkriptionsmodell på sidan Modeller.",
+        "startFailed": "Det gick inte att starta transkriberingen av den här filen."
+      }
     },
     "debug": {
       "title": "Felsökning",

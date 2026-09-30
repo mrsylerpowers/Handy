@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "一般",
+    "transcribeFile": "ファイルを文字起こし",
     "models": "モデル",
     "advanced": "詳細設定",
     "postProcessing": "後処理",
@@ -469,6 +470,35 @@
       "retranscribeError": "再文字起こしに失敗しました。もう一度お試しください。",
       "transcribing": "文字起こし中…",
       "transcriptionFailed": "文字起こしに失敗しました。リトライアイコンを使用して再文字起こしできます。"
+    },
+    "transcribeFile": {
+      "title": "ファイルを文字起こし",
+      "description": "選択中のモデル（{{model}}）で音声・動画ファイルをテキストに変換します。",
+      "descriptionNoModel": "ファイルを文字起こしするには、モデルページで文字起こしモデルをダウンロードしてください。",
+      "dropHere": "ここに音声または動画ファイルをドロップ",
+      "chooseFile": "ファイルを選択…",
+      "audioFilterName": "音声・動画ファイル",
+      "reading": "ファイルを読み込み中…",
+      "progress": "{{total}} 区間中 {{completed}} 区間を文字起こし済み",
+      "cancel": "キャンセル",
+      "cancelling": "キャンセル中…",
+      "cancelled": "文字起こしをキャンセルしました。",
+      "failedTitle": "{{file}} を文字起こしできませんでした",
+      "transcript": "文字起こし結果",
+      "noSpeech": "このファイルに音声が見つかりませんでした。",
+      "copied": "コピーしました",
+      "save": ".txt として保存",
+      "textFilterName": "テキストファイル",
+      "saved": "文字起こし結果を保存しました",
+      "saveFailed": "文字起こし結果を保存できませんでした",
+      "dictationBlockedTitle": "ファイルを文字起こし中",
+      "dictationBlocked": "ファイルの処理が終わるか、キャンセルするまで音声入力は一時停止されます。",
+      "errors": {
+        "alreadyRunning": "すでに別のファイルを文字起こし中です。",
+        "recordingInProgress": "ファイルを文字起こしする前に音声入力を終了してください。",
+        "noModel": "先にモデルページで文字起こしモデルをダウンロードしてください。",
+        "startFailed": "このファイルの文字起こしを開始できませんでした。"
+      }
     },
     "debug": {
       "title": "デバッグ",

@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Generelt",
+    "transcribeFile": "Transskriber fil",
     "models": "Modeller",
     "advanced": "Avanceret",
     "postProcessing": "Efterbehandling",
@@ -469,6 +470,35 @@
       "retranscribeError": "Kunne ikke transskribere igen. Prøv igen.",
       "transcribing": "Transskriberer...",
       "transcriptionFailed": "Transskription mislykkedes. Du kan transskribere igen ved hjælp af genforsøgsikonet."
+    },
+    "transcribeFile": {
+      "title": "Transskriber fil",
+      "description": "Omdan en lyd- eller videofil til tekst med din valgte model ({{model}}).",
+      "descriptionNoModel": "Download en transskriptionsmodel på siden Modeller for at transskribere filer.",
+      "dropHere": "Slip en lyd- eller videofil her",
+      "chooseFile": "Vælg fil...",
+      "audioFilterName": "Lyd- og videofiler",
+      "reading": "Læser fil...",
+      "progress": "{{completed}} af {{total}} segmenter transskriberet",
+      "cancel": "Annuller",
+      "cancelling": "Annullerer...",
+      "cancelled": "Transskription annulleret.",
+      "failedTitle": "Kunne ikke transskribere {{file}}",
+      "transcript": "Transskription",
+      "noSpeech": "Der blev ikke fundet tale i denne fil.",
+      "copied": "Kopieret",
+      "save": "Gem som .txt",
+      "textFilterName": "Tekstfiler",
+      "saved": "Transskription gemt",
+      "saveFailed": "Kunne ikke gemme transskriptionen",
+      "dictationBlockedTitle": "Filtransskription i gang",
+      "dictationBlocked": "Diktering er sat på pause, indtil filen er færdig, eller du annullerer den.",
+      "errors": {
+        "alreadyRunning": "En fil er allerede ved at blive transskriberet.",
+        "recordingInProgress": "Afslut din diktering, før du transskriberer en fil.",
+        "noModel": "Download først en transskriptionsmodel på siden Modeller.",
+        "startFailed": "Kunne ikke starte transskriptionen af denne fil."
+      }
     },
     "debug": {
       "title": "Fejlfinding",

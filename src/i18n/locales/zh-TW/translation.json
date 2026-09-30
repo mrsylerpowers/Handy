@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "一般",
+    "transcribeFile": "轉錄檔案",
     "models": "模型",
     "advanced": "進階",
     "postProcessing": "後處理",
@@ -469,6 +470,35 @@
       "retranscribeError": "重新轉錄失敗，請重試。",
       "transcribing": "轉錄中...",
       "transcriptionFailed": "轉錄失敗。您可以使用重試圖示重新轉錄。"
+    },
+    "transcribeFile": {
+      "title": "轉錄檔案",
+      "description": "使用所選模型（{{model}}）將音訊或影片檔案轉換為文字。",
+      "descriptionNoModel": "請在「模型」頁面下載轉錄模型以轉錄檔案。",
+      "dropHere": "將音訊或影片檔案拖放到這裡",
+      "chooseFile": "選擇檔案...",
+      "audioFilterName": "音訊與影片檔案",
+      "reading": "正在讀取檔案...",
+      "progress": "已轉錄 {{completed}}/{{total}} 個片段",
+      "cancel": "取消",
+      "cancelling": "正在取消...",
+      "cancelled": "已取消轉錄。",
+      "failedTitle": "無法轉錄 {{file}}",
+      "transcript": "轉錄文字",
+      "noSpeech": "此檔案中未偵測到語音。",
+      "copied": "已複製",
+      "save": "儲存為 .txt",
+      "textFilterName": "文字檔案",
+      "saved": "已儲存轉錄文字",
+      "saveFailed": "無法儲存轉錄文字",
+      "dictationBlockedTitle": "正在轉錄檔案",
+      "dictationBlocked": "在檔案轉錄完成或您取消之前，聽寫已暫停。",
+      "errors": {
+        "alreadyRunning": "已有檔案正在轉錄。",
+        "recordingInProgress": "請先完成聽寫，再轉錄檔案。",
+        "noModel": "請先在「模型」頁面下載轉錄模型。",
+        "startFailed": "無法開始轉錄此檔案。"
+      }
     },
     "debug": {
       "title": "偵錯",

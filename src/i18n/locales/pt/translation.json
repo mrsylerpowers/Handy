@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Geral",
+    "transcribeFile": "Transcrever arquivo",
     "models": "Modelos",
     "advanced": "Avançado",
     "postProcessing": "Pós-Processamento",
@@ -469,6 +470,35 @@
       "retranscribeError": "Falha ao re-transcrever. Por favor, tente novamente.",
       "transcribing": "Transcrevendo...",
       "transcriptionFailed": "A transcrição falhou. Você pode re-transcrever usando o ícone de tentar novamente."
+    },
+    "transcribeFile": {
+      "title": "Transcrever arquivo",
+      "description": "Transforme um arquivo de áudio ou vídeo em texto com o modelo selecionado ({{model}}).",
+      "descriptionNoModel": "Baixe um modelo de transcrição na página Modelos para transcrever arquivos.",
+      "dropHere": "Solte um arquivo de áudio ou vídeo aqui",
+      "chooseFile": "Escolher arquivo...",
+      "audioFilterName": "Arquivos de áudio e vídeo",
+      "reading": "Lendo arquivo...",
+      "progress": "{{completed}} de {{total}} segmentos transcritos",
+      "cancel": "Cancelar",
+      "cancelling": "Cancelando...",
+      "cancelled": "Transcrição cancelada.",
+      "failedTitle": "Não foi possível transcrever {{file}}",
+      "transcript": "Transcrição",
+      "noSpeech": "Nenhuma fala foi encontrada neste arquivo.",
+      "copied": "Copiado",
+      "save": "Salvar como .txt",
+      "textFilterName": "Arquivos de texto",
+      "saved": "Transcrição salva",
+      "saveFailed": "Não foi possível salvar a transcrição",
+      "dictationBlockedTitle": "Transcrição de arquivo em andamento",
+      "dictationBlocked": "O ditado fica pausado até o arquivo terminar ou você cancelar.",
+      "errors": {
+        "alreadyRunning": "Um arquivo já está sendo transcrito.",
+        "recordingInProgress": "Termine o ditado antes de transcrever um arquivo.",
+        "noModel": "Primeiro baixe um modelo de transcrição na página Modelos.",
+        "startFailed": "Não foi possível iniciar a transcrição deste arquivo."
+      }
     },
     "debug": {
       "title": "Depuração",

@@ -53,6 +53,20 @@ rtrb = "0.4.0"
 anyhow = "1.0.95"
 rubato = "0.16.2"
 hound = "3.5.1"
+# Decodes files for "Transcribe File": WAV/AIFF, MP3, AAC (M4A and MP4/MOV
+# audio), FLAC and Ogg Vorbis. The same symphonia build rodio already pulls
+# in, so this adds no crates.
+symphonia = { version = "0.5.5", default-features = false, features = [
+  "aac",
+  "aiff",
+  "flac",
+  "isomp4",
+  "mp3",
+  "ogg",
+  "pcm",
+  "vorbis",
+  "wav",
+] }
 log = "0.4.25"
 env_filter = "0.1.0"
 tokio = "1.43.0"

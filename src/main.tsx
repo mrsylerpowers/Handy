@@ -26,6 +26,10 @@ import "./i18n";
 import { useModelStore } from "./stores/modelStore";
 useModelStore.getState().initialize();
 
+// Track file transcriptions app-wide so progress survives switching pages
+import { useFileTranscriptionStore } from "./stores/fileTranscriptionStore";
+useFileTranscriptionStore.getState().initialize();
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <App />

@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Generale",
+    "transcribeFile": "Trascrivi file",
     "models": "Modelli",
     "advanced": "Avanzate",
     "postProcessing": "Post-Elaborazione",
@@ -469,6 +470,35 @@
       "retranscribeError": "Impossibile ri-trascrivere. Riprova.",
       "transcribing": "Trascrizione in corso...",
       "transcriptionFailed": "Trascrizione fallita. Puoi ri-trascrivere usando l'icona di ripetizione."
+    },
+    "transcribeFile": {
+      "title": "Trascrivi file",
+      "description": "Converti un file audio o video in testo con il modello selezionato ({{model}}).",
+      "descriptionNoModel": "Scarica un modello di trascrizione nella pagina Modelli per trascrivere i file.",
+      "dropHere": "Trascina qui un file audio o video",
+      "chooseFile": "Scegli file...",
+      "audioFilterName": "File audio e video",
+      "reading": "Lettura del file...",
+      "progress": "{{completed}} di {{total}} segmenti trascritti",
+      "cancel": "Annulla",
+      "cancelling": "Annullamento...",
+      "cancelled": "Trascrizione annullata.",
+      "failedTitle": "Impossibile trascrivere {{file}}",
+      "transcript": "Trascrizione",
+      "noSpeech": "Nessun parlato trovato in questo file.",
+      "copied": "Copiato",
+      "save": "Salva come .txt",
+      "textFilterName": "File di testo",
+      "saved": "Trascrizione salvata",
+      "saveFailed": "Impossibile salvare la trascrizione",
+      "dictationBlockedTitle": "Trascrizione del file in corso",
+      "dictationBlocked": "La dettatura è in pausa finché il file non è completato o non lo annulli.",
+      "errors": {
+        "alreadyRunning": "È già in corso la trascrizione di un file.",
+        "recordingInProgress": "Termina la dettatura prima di trascrivere un file.",
+        "noModel": "Scarica prima un modello di trascrizione nella pagina Modelli.",
+        "startFailed": "Impossibile avviare la trascrizione di questo file."
+      }
     },
     "debug": {
       "title": "Debug",

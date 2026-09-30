@@ -908,6 +908,35 @@ async updateRecordingRetentionPeriod(period: string) : Promise<Result<null, stri
 }
 },
 /**
+ * Start transcribing an audio or video file. Returns once the job is
+ * accepted; progress and the result arrive as `FileTranscriptionEvent`s.
+ */
+async startFileTranscription(path: string) : Promise<Result<null, StartFileTranscriptionError>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("start_file_transcription", { path }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Stop the running file transcription after its current chunk.
+ */
+async cancelFileTranscription() : Promise<void> {
+    await TAURI_INVOKE("cancel_file_transcription");
+},
+/**
+ * Write a transcript to a path the user picked in the save dialog.
+ */
+async saveTranscriptFile(path: string, text: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("save_transcript_file", { path, text }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
  * Checks if the Mac is a laptop by detecting battery presence
  * 
  * This uses pmset to check for battery information.
@@ -927,10 +956,12 @@ async isLaptop() : Promise<Result<boolean, string>> {
 
 
 export const events = __makeEvents__<{
+fileTranscriptionEvent: FileTranscriptionEvent,
 historyUpdatePayload: HistoryUpdatePayload,
 streamPhaseEvent: StreamPhaseEvent,
 streamTextEvent: StreamTextEvent
 }>({
+fileTranscriptionEvent: "file-transcription-event",
 historyUpdatePayload: "history-update-payload",
 streamPhaseEvent: "stream-phase-event",
 streamTextEvent: "stream-text-event"
@@ -1018,6 +1049,22 @@ export type EngineType =
  * the file, so this one variant covers the whole transcribe-cpp family.
  */
 "TranscribeCpp" | "Parakeet" | "Moonshine" | "MoonshineStreaming" | "SenseVoice" | "GigaAM" | "Canary" | "Cohere"
+/**
+ * Lifecycle of a file transcription, emitted to the frontend.
+ */
+export type FileTranscriptionEvent =
+/**
+ * The file decoded; `total_chunks` chunks will now be transcribed.
+ */
+{ status: "started"; file_name: string; duration_secs: number; total_chunks: number } |
+/**
+ * One more chunk finished; `text` is its transcript (empty if silent).
+ */
+{ status: "progress"; completed_chunks: number; total_chunks: number; text: string } |
+/**
+ * The whole file is done; `text` is the final transcript.
+ */
+{ status: "completed"; text: string } | { status: "failed"; error: string } | { status: "cancelled" }
 export type GpuDeviceOption = { id: string; name: string; total_vram_mb: number }
 export type HistoryEntry = { id: number; file_name: string; timestamp: number; saved: boolean; title: string; transcription_text: string; post_processed_text: string | null; post_process_prompt: string | null; post_process_requested: boolean }
 export type HistoryUpdatePayload = { action: "added"; entry: HistoryEntry } | { action: "updated"; entry: HistoryEntry } | { action: "deleted"; id: number } | { action: "toggled"; id: number }
@@ -1131,6 +1178,22 @@ export type ShortcutActivation =
 "hold_or_toggle"
 export type ShortcutBinding = { id: string; name: string; description: string; default_binding: string; current_binding: string }
 export type SoundTheme = "marimba" | "pop" | "custom"
+/**
+ * Why a file transcription could not start.
+ */
+export type StartFileTranscriptionError =
+/**
+ * Another file is still being transcribed.
+ */
+"already_running" |
+/**
+ * A dictation is being recorded.
+ */
+"recording_in_progress" |
+/**
+ * No transcription model is downloaded.
+ */
+"no_model"
 /**
  * Phase of the streaming overlay card, emitted to drive its UI state.
  */

@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "Général",
+    "transcribeFile": "Transcrire un fichier",
     "models": "Modèles",
     "advanced": "Avancé",
     "postProcessing": "Post-traitement",
@@ -469,6 +470,35 @@
       "retranscribeError": "Impossible de re-transcrire. Veuillez réessayer.",
       "transcribing": "Transcription en cours...",
       "transcriptionFailed": "La transcription a échoué. Vous pouvez re-transcrire en utilisant l'icône de réessai."
+    },
+    "transcribeFile": {
+      "title": "Transcrire un fichier",
+      "description": "Convertissez un fichier audio ou vidéo en texte avec le modèle sélectionné ({{model}}).",
+      "descriptionNoModel": "Téléchargez un modèle de transcription dans la page Modèles pour transcrire des fichiers.",
+      "dropHere": "Déposez un fichier audio ou vidéo ici",
+      "chooseFile": "Choisir un fichier...",
+      "audioFilterName": "Fichiers audio et vidéo",
+      "reading": "Lecture du fichier...",
+      "progress": "{{completed}} segments transcrits sur {{total}}",
+      "cancel": "Annuler",
+      "cancelling": "Annulation...",
+      "cancelled": "Transcription annulée.",
+      "failedTitle": "Impossible de transcrire {{file}}",
+      "transcript": "Transcription",
+      "noSpeech": "Aucune parole n'a été détectée dans ce fichier.",
+      "copied": "Copié",
+      "save": "Enregistrer en .txt",
+      "textFilterName": "Fichiers texte",
+      "saved": "Transcription enregistrée",
+      "saveFailed": "Impossible d'enregistrer la transcription",
+      "dictationBlockedTitle": "Transcription de fichier en cours",
+      "dictationBlocked": "La dictée est en pause jusqu'à la fin du fichier ou jusqu'à ce que vous l'annuliez.",
+      "errors": {
+        "alreadyRunning": "Un fichier est déjà en cours de transcription.",
+        "recordingInProgress": "Terminez votre dictée avant de transcrire un fichier.",
+        "noModel": "Téléchargez d'abord un modèle de transcription dans la page Modèles.",
+        "startFailed": "Impossible de démarrer la transcription de ce fichier."
+      }
     },
     "debug": {
       "title": "Débogage",

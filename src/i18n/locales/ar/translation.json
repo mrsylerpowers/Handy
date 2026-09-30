@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "عام",
+    "transcribeFile": "تفريغ ملف",
     "advanced": "متقدم",
     "postProcessing": "معالجة لاحقة",
     "history": "السجل",
@@ -446,6 +447,35 @@
       "retranscribeError": "فشلت إعادة النسخ. يرجى المحاولة مرة أخرى.",
       "transcribing": "جارٍ النسخ...",
       "transcriptionFailed": "فشل النسخ. يمكنك إعادة النسخ باستخدام أيقونة إعادة المحاولة."
+    },
+    "transcribeFile": {
+      "title": "تفريغ ملف",
+      "description": "حوّل ملف صوت أو فيديو إلى نص باستخدام النموذج المحدد ({{model}}).",
+      "descriptionNoModel": "نزّل نموذج تفريغ من صفحة النماذج لتتمكن من تفريغ الملفات.",
+      "dropHere": "أفلت ملف صوت أو فيديو هنا",
+      "chooseFile": "اختيار ملف...",
+      "audioFilterName": "ملفات الصوت والفيديو",
+      "reading": "جارٍ قراءة الملف...",
+      "progress": "تم تفريغ {{completed}} من {{total}} مقطع",
+      "cancel": "إلغاء",
+      "cancelling": "جارٍ الإلغاء...",
+      "cancelled": "تم إلغاء التفريغ.",
+      "failedTitle": "تعذر تفريغ {{file}}",
+      "transcript": "النص المفرغ",
+      "noSpeech": "لم يُعثر على كلام في هذا الملف.",
+      "copied": "تم النسخ",
+      "save": "حفظ كملف .txt",
+      "textFilterName": "ملفات نصية",
+      "saved": "تم حفظ النص المفرغ",
+      "saveFailed": "تعذر حفظ النص المفرغ",
+      "dictationBlockedTitle": "جارٍ تفريغ ملف",
+      "dictationBlocked": "الإملاء متوقف مؤقتًا حتى ينتهي الملف أو تلغيه.",
+      "errors": {
+        "alreadyRunning": "يجري تفريغ ملف بالفعل.",
+        "recordingInProgress": "أنهِ الإملاء قبل تفريغ ملف.",
+        "noModel": "نزّل نموذج تفريغ من صفحة النماذج أولًا.",
+        "startFailed": "تعذر بدء تفريغ هذا الملف."
+      }
     },
     "debug": {
       "title": "تصحيح الأخطاء",

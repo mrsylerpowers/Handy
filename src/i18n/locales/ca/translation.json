@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "General",
+    "transcribeFile": "Transcriu un fitxer",
     "models": "Models",
     "advanced": "Avançat",
     "postProcessing": "Postprocessament",
@@ -469,6 +470,35 @@
       "retranscribeError": "No s'ha pogut tornar a transcriure. Torneu-ho a provar.",
       "transcribing": "S'està transcrivint...",
       "transcriptionFailed": "La transcripció ha fallat. Podeu tornar a transcriure amb la icona de reintent."
+    },
+    "transcribeFile": {
+      "title": "Transcriu un fitxer",
+      "description": "Convertiu un fitxer d'àudio o de vídeo en text amb el model seleccionat ({{model}}).",
+      "descriptionNoModel": "Baixeu un model de transcripció a la pàgina Models per transcriure fitxers.",
+      "dropHere": "Deixeu anar aquí un fitxer d'àudio o de vídeo",
+      "chooseFile": "Tria un fitxer...",
+      "audioFilterName": "Fitxers d'àudio i de vídeo",
+      "reading": "S'està llegint el fitxer...",
+      "progress": "S'han transcrit {{completed}} de {{total}} segments",
+      "cancel": "Cancel·la",
+      "cancelling": "S'està cancel·lant...",
+      "cancelled": "S'ha cancel·lat la transcripció.",
+      "failedTitle": "No s'ha pogut transcriure {{file}}",
+      "transcript": "Transcripció",
+      "noSpeech": "No s'ha trobat veu en aquest fitxer.",
+      "copied": "S'ha copiat",
+      "save": "Desa com a .txt",
+      "textFilterName": "Fitxers de text",
+      "saved": "S'ha desat la transcripció",
+      "saveFailed": "No s'ha pogut desar la transcripció",
+      "dictationBlockedTitle": "Transcripció de fitxer en curs",
+      "dictationBlocked": "El dictat està en pausa fins que el fitxer acabi o el cancel·leu.",
+      "errors": {
+        "alreadyRunning": "Ja s'està transcrivint un fitxer.",
+        "recordingInProgress": "Acabeu el dictat abans de transcriure un fitxer.",
+        "noModel": "Primer baixeu un model de transcripció a la pàgina Models.",
+        "startFailed": "No s'ha pogut començar a transcriure aquest fitxer."
+      }
     },
     "debug": {
       "title": "Depuració",

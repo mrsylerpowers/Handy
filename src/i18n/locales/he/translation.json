@@ -11,6 +11,7 @@
   },
   "sidebar": {
     "general": "כללי",
+    "transcribeFile": "תמלול קובץ",
     "models": "מודלים",
     "advanced": "מתקדם",
     "postProcessing": "עיבוד משלים",
@@ -469,6 +470,35 @@
       "retranscribeError": "תמלול מחדש נכשל. נסה שוב.",
       "transcribing": "מתמלל...",
       "transcriptionFailed": "התמלול נכשל. אפשר לתמלל מחדש באמצעות אייקון הניסיון החוזר."
+    },
+    "transcribeFile": {
+      "title": "תמלול קובץ",
+      "description": "המר קובץ שמע או וידאו לטקסט באמצעות המודל שנבחר ({{model}}).",
+      "descriptionNoModel": "כדי לתמלל קבצים, הורד מודל תמלול בעמוד המודלים.",
+      "dropHere": "גרור לכאן קובץ שמע או וידאו",
+      "chooseFile": "בחר קובץ...",
+      "audioFilterName": "קובצי שמע ווידאו",
+      "reading": "קורא את הקובץ...",
+      "progress": "תומללו {{completed}} מתוך {{total}} קטעים",
+      "cancel": "ביטול",
+      "cancelling": "מבטל...",
+      "cancelled": "התמלול בוטל.",
+      "failedTitle": "לא ניתן לתמלל את {{file}}",
+      "transcript": "תמלול",
+      "noSpeech": "לא נמצא דיבור בקובץ זה.",
+      "copied": "הועתק",
+      "save": "שמור כ-.txt",
+      "textFilterName": "קובצי טקסט",
+      "saved": "התמלול נשמר",
+      "saveFailed": "לא ניתן לשמור את התמלול",
+      "dictationBlockedTitle": "תמלול קובץ מתבצע",
+      "dictationBlocked": "ההכתבה מושהית עד שהקובץ יסתיים או שתבטל אותו.",
+      "errors": {
+        "alreadyRunning": "קובץ אחר כבר מתומלל.",
+        "recordingInProgress": "סיים את ההכתבה לפני תמלול קובץ.",
+        "noModel": "הורד תחילה מודל תמלול בעמוד המודלים.",
+        "startFailed": "לא ניתן להתחיל לתמלל קובץ זה."
+      }
     },
     "debug": {
       "title": "ניפוי שגיאות",
