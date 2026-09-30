@@ -1,0 +1,81 @@
+name: "Windows Build"
+
+# Builds the unsigned Windows x64 installers (NSIS .exe and .msi) for this
+# fork. Reuses the upstream build.yml with signing off: the upstream release
+# workflows need the upstream maintainer's signing secrets and are disabled in
+# this fork. Every run uploads the installers as a workflow artifact; manual runs
+# can also publish them as a GitHub pre-release.
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish-release:
+        description: "Also publish the installers as a GitHub pre-release"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  create-release:
+    if: ${{ inputs.publish-release }}
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    outputs:
+      release-id: ${{ steps.create-release.outputs.result }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Get version from tauri.conf.json
+        id: get-version
+        shell: bash
+        run: |
+          VERSION=$(grep -o '"version": "[^"]*"' src-tauri/tauri.conf.json | cut -d'"' -f4)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create pre-release
+        id: create-release
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const version = "${{ steps.get-version.outputs.version }}";
+            const build = "${{ github.run_number }}";
+            const { data } = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: `v${version}-files.${build}`,
+              target_commitish: context.sha,
+              name: `Handy ${version} + file transcription (build ${build})`,
+              body: [
+                "Unofficial fork of [Handy](https://github.com/cjpais/Handy) that adds a **Transcribe File** page: drop in an audio or video file (MP3, WAV, M4A, AAC, FLAC, OGG, AIFF, MP4, MOV) and get a transcript you can copy or save.",
+                "",
+                "The installers are **unsigned**: Windows SmartScreen will warn on first launch (More info → Run anyway). The auto-updater is disabled so upstream Handy can't replace this build.",
+              ].join("\n"),
+              prerelease: true,
+            });
+            return data.id;
+
+  build:
+    needs: create-release
+    # Runs with or without the release job; skipped means a plain artifact build.
+    if: ${{ !cancelled() && needs.create-release.result != 'failure' }}
+    permissions:
+      contents: write
+    uses: ./.github/workflows/build.yml
+    with:
+      platform: "windows-latest"
+      target: "x86_64-pc-windows-msvc"
+      build-args: ""
+      asset-prefix: "handy-files"
+      upload-artifacts: true
+      sign-binaries: false
+      release-id: ${{ needs.create-release.outputs.release-id }}
+    secrets: inherit

@@ -1192,10 +1192,15 @@ fn apply_settings_migrations(
 /// Update checks are forced off (without touching the persisted setting) when
 /// `HANDY_DISABLE_UPDATER` is set — e.g. by the Nix package, since self-update
 /// can't work against an immutable /nix/store install.
+///
+/// Fork builds (file transcription) always force them off: the updater would
+/// replace this build with upstream Handy, which lacks the feature.
 pub fn update_checks_forced_disabled() -> bool {
     use std::sync::OnceLock;
+    const FORK_BUILD: bool = true;
     static IS_UPDATER_DISABLED: OnceLock<bool> = OnceLock::new();
-    *IS_UPDATER_DISABLED.get_or_init(|| utils::env_flag_enabled("HANDY_DISABLE_UPDATER"))
+    *IS_UPDATER_DISABLED
+        .get_or_init(|| FORK_BUILD || utils::env_flag_enabled("HANDY_DISABLE_UPDATER"))
 }
 
 /// Effective updater state: the user's stored preference, overridden to `false`

@@ -1,5 +1,10 @@
 # Handy
 
+> [!NOTE]
+> **This is a fork** of [cjpais/Handy](https://github.com/cjpais/Handy) that adds **file transcription**: open the **Transcribe File** page, drop in an audio or video file (MP3, WAV, M4A, AAC, FLAC, OGG, AIFF, MP4, MOV), and copy or save the transcript. Files are decoded, split at pauses into chunks of at most 30 seconds, and transcribed locally with your selected model. The same pipeline backs `handy --transcribe-file <file>`.
+>
+> Windows installers are built by the [Windows Build](../../actions/workflows/windows-build.yml) workflow and published under [Releases](../../releases). They are unsigned (SmartScreen: More info → Run anyway), and the auto-updater is disabled so upstream Handy cannot replace this build.
+
 [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/invite/WVBeWsNXK4)
 
 **A free, open source, and extensible speech-to-text application that works completely offline.**
