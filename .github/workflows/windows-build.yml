@@ -57,6 +57,8 @@ jobs:
               body: [
                 "Unofficial fork of [Handy](https://github.com/cjpais/Handy) that adds a **Transcribe File** page: drop in an audio or video file (MP3, WAV, M4A, AAC, FLAC, OGG, AIFF, MP4, MOV) and get a transcript you can copy or save.",
                 "",
+                "It also adds an **API Server** page: an OpenAI-compatible speech-to-text endpoint (`/v1/audio/transcriptions`) on your local network, so apps like phone dictation apps can use Handy's model as a custom provider.",
+                "",
                 "The installers are **unsigned**: Windows SmartScreen will warn on first launch (More info → Run anyway). The auto-updater is disabled so upstream Handy can't replace this build.",
               ].join("\n"),
               prerelease: true,

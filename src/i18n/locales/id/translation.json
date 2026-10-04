@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Umum",
     "transcribeFile": "Transkripsi File",
+    "apiServer": "Server API",
     "models": "Model",
     "advanced": "Lanjutan",
     "postProcessing": "Pascaproses",
@@ -499,6 +500,44 @@
         "noModel": "Unduh model transkripsi di halaman Model terlebih dahulu.",
         "startFailed": "Gagal memulai transkripsi file ini."
       }
+    },
+    "apiServer": {
+      "title": "Server API",
+      "description": "Izinkan perangkat lain, seperti aplikasi dikte di ponsel Anda, mentranskripsikan audio dengan model pilihan Anda ({{model}}) melalui API ucapan-ke-teks yang kompatibel dengan OpenAI.",
+      "descriptionNoModel": "Izinkan perangkat lain, seperti aplikasi dikte di ponsel Anda, mentranskripsikan audio dengan Handy. Unduh model transkripsi di halaman Model terlebih dahulu.",
+      "enable": {
+        "label": "Aktifkan server API",
+        "description": "Terima permintaan transkripsi dari perangkat di jaringan Anda selama Handy berjalan."
+      },
+      "port": {
+        "title": "Port",
+        "description": "Port jaringan tempat server mendengarkan."
+      },
+      "apiKey": {
+        "title": "Kunci API",
+        "description": "Aplikasi harus mengirim kunci ini. Biarkan kosong untuk menerima permintaan dari perangkat apa pun di jaringan Anda.",
+        "regenerate": "Kunci baru",
+        "emptyWarning": "Tidak ada kunci API yang diatur, sehingga perangkat apa pun di jaringan Anda dapat menggunakan server ini."
+      },
+      "connect": {
+        "title": "Hubungkan Aplikasi",
+        "running": "Mendengarkan di port {{port}}",
+        "starting": "Memulai...",
+        "baseUrl": "URL Dasar",
+        "steps": {
+          "provider": "Di aplikasi Anda, pilih penyedia ucapan-ke-teks kustom (kompatibel dengan OpenAI).",
+          "baseUrl": "URL Dasar: salah satu alamat di atas. Nama yang di-resolve DNS lokal Anda ke komputer ini juga bisa digunakan.",
+          "apiKey": "Kunci API: kunci di atas. Model: apa saja; Handy selalu menggunakan model pilihannya."
+        },
+        "network": "Perangkat harus berada di jaringan yang sama dengan komputer ini. Jika firewall Anda menanyakan apakah Handy boleh menerima koneksi, izinkan untuk jaringan pribadi."
+      },
+      "errors": {
+        "portInUse": "Port {{port}} sudah digunakan oleh program lain. Pilih port lain.",
+        "portUnavailable": "Handy tidak diizinkan menggunakan port {{port}}. Windows mungkin mencadangkannya untuk Hyper-V atau WSL. Pilih port lain.",
+        "failed": "Server API tidak dapat dimulai: {{message}}",
+        "invalidPort": "Masukkan port dari 1 hingga 65535."
+      },
+      "copied": "Disalin"
     },
     "debug": {
       "title": "Debug",

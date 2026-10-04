@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Ogólne",
     "transcribeFile": "Transkrybuj plik",
+    "apiServer": "Serwer API",
     "models": "Modele",
     "advanced": "Zaawansowane",
     "postProcessing": "Postproces",
@@ -499,6 +500,44 @@
         "noModel": "Najpierw pobierz model transkrypcji na stronie Modele.",
         "startFailed": "Nie udało się rozpocząć transkrypcji tego pliku."
       }
+    },
+    "apiServer": {
+      "title": "Serwer API",
+      "description": "Pozwól innym urządzeniom, takim jak aplikacja do dyktowania na telefonie, transkrybować dźwięk wybranym modelem ({{model}}) przez zgodne z OpenAI API zamiany mowy na tekst.",
+      "descriptionNoModel": "Pozwól innym urządzeniom, takim jak aplikacja do dyktowania na telefonie, transkrybować dźwięk za pomocą Handy. Najpierw pobierz model transkrypcji na stronie Modele.",
+      "enable": {
+        "label": "Włącz serwer API",
+        "description": "Przyjmuj żądania transkrypcji od urządzeń w twojej sieci, gdy Handy jest uruchomiony."
+      },
+      "port": {
+        "title": "Port",
+        "description": "Port sieciowy, na którym nasłuchuje serwer."
+      },
+      "apiKey": {
+        "title": "Klucz API",
+        "description": "Aplikacje muszą wysyłać ten klucz. Pozostaw go pustym, aby przyjmować żądania od dowolnego urządzenia w twojej sieci.",
+        "regenerate": "Nowy klucz",
+        "emptyWarning": "Nie ustawiono klucza API, więc każde urządzenie w twojej sieci może korzystać z tego serwera."
+      },
+      "connect": {
+        "title": "Połącz aplikację",
+        "running": "Nasłuchuje na porcie {{port}}",
+        "starting": "Uruchamianie...",
+        "baseUrl": "Adres bazowy",
+        "steps": {
+          "provider": "W aplikacji wybierz niestandardowego (zgodnego z OpenAI) dostawcę zamiany mowy na tekst.",
+          "baseUrl": "Adres bazowy: jeden z adresów powyżej. Działa też nazwa, którą twój lokalny DNS rozwiązuje na ten komputer.",
+          "apiKey": "Klucz API: klucz powyżej. Model: dowolny; Handy zawsze używa wybranego modelu."
+        },
+        "network": "Urządzenie musi być w tej samej sieci co ten komputer. Jeśli zapora zapyta, czy Handy może przyjmować połączenia, zezwól na to w sieciach prywatnych."
+      },
+      "errors": {
+        "portInUse": "Port {{port}} jest już używany przez inny program. Wybierz inny port.",
+        "portUnavailable": "Handy nie może używać portu {{port}}. Windows może rezerwować go dla Hyper-V lub WSL. Wybierz inny port.",
+        "failed": "Nie udało się uruchomić serwera API: {{message}}",
+        "invalidPort": "Wpisz port od 1 do 65535."
+      },
+      "copied": "Skopiowano"
     },
     "debug": {
       "title": "Debugowanie",

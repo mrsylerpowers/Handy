@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "General",
     "transcribeFile": "Transcriu un fitxer",
+    "apiServer": "Servidor d'API",
     "models": "Models",
     "advanced": "Avançat",
     "postProcessing": "Postprocessament",
@@ -499,6 +500,44 @@
         "noModel": "Primer baixeu un model de transcripció a la pàgina Models.",
         "startFailed": "No s'ha pogut començar a transcriure aquest fitxer."
       }
+    },
+    "apiServer": {
+      "title": "Servidor d'API",
+      "description": "Permeteu que altres dispositius, com ara una aplicació de dictat del telèfon, transcriguin àudio amb el model seleccionat ({{model}}) mitjançant una API de veu a text compatible amb OpenAI.",
+      "descriptionNoModel": "Permeteu que altres dispositius, com ara una aplicació de dictat del telèfon, transcriguin àudio amb Handy. Primer baixeu un model de transcripció a la pàgina Models.",
+      "enable": {
+        "label": "Activa el servidor d'API",
+        "description": "Accepta sol·licituds de transcripció dels dispositius de la vostra xarxa mentre Handy s'executa."
+      },
+      "port": {
+        "title": "Port",
+        "description": "El port de xarxa on escolta el servidor."
+      },
+      "apiKey": {
+        "title": "Clau de l'API",
+        "description": "Les aplicacions han d'enviar aquesta clau. Deixeu-la buida per acceptar sol·licituds de qualsevol dispositiu de la vostra xarxa.",
+        "regenerate": "Clau nova",
+        "emptyWarning": "No hi ha cap clau de l'API definida, de manera que qualsevol dispositiu de la vostra xarxa pot fer servir aquest servidor."
+      },
+      "connect": {
+        "title": "Connecta una aplicació",
+        "running": "Escoltant al port {{port}}",
+        "starting": "S'està iniciant...",
+        "baseUrl": "URL de base",
+        "steps": {
+          "provider": "A l'aplicació, trieu un proveïdor de veu a text personalitzat (compatible amb OpenAI).",
+          "baseUrl": "URL de base: una de les adreces de dalt. També funciona un nom que el vostre DNS local resolgui cap a aquest ordinador.",
+          "apiKey": "Clau de l'API: la clau de dalt. Model: qualsevol; Handy sempre fa servir el model seleccionat."
+        },
+        "network": "El dispositiu ha d'estar a la mateixa xarxa que aquest ordinador. Si el tallafoc pregunta si Handy pot acceptar connexions, permeteu-ho a les xarxes privades."
+      },
+      "errors": {
+        "portInUse": "Un altre programa ja fa servir el port {{port}}. Trieu un port diferent.",
+        "portUnavailable": "Handy no té permís per fer servir el port {{port}}. És possible que Windows el reservi per a Hyper-V o WSL. Trieu un port diferent.",
+        "failed": "No s'ha pogut iniciar el servidor d'API: {{message}}",
+        "invalidPort": "Introduïu un port de l'1 al 65535."
+      },
+      "copied": "S'ha copiat"
     },
     "debug": {
       "title": "Depuració",

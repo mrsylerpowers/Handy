@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Genel",
     "transcribeFile": "Dosya Transkribe Et",
+    "apiServer": "API Sunucusu",
     "models": "Modeller",
     "advanced": "Gelişmiş",
     "postProcessing": "Son İşlem",
@@ -499,6 +500,44 @@
         "noModel": "Önce Modeller sayfasından bir transkripsiyon modeli indirin.",
         "startFailed": "Bu dosyanın transkripsiyonu başlatılamadı."
       }
+    },
+    "apiServer": {
+      "title": "API Sunucusu",
+      "description": "Telefonunuzdaki bir dikte uygulaması gibi diğer cihazların, OpenAI uyumlu bir konuşmadan metne API'si üzerinden seçili modelinizle ({{model}}) ses transkribe etmesine izin verin.",
+      "descriptionNoModel": "Telefonunuzdaki bir dikte uygulaması gibi diğer cihazların Handy ile ses transkribe etmesine izin verin. Önce Modeller sayfasından bir transkripsiyon modeli indirin.",
+      "enable": {
+        "label": "API sunucusunu etkinleştir",
+        "description": "Handy çalışırken ağınızdaki cihazlardan gelen transkripsiyon isteklerini kabul et."
+      },
+      "port": {
+        "title": "Port",
+        "description": "Sunucunun dinlediği ağ portu."
+      },
+      "apiKey": {
+        "title": "API Anahtarı",
+        "description": "Uygulamalar bu anahtarı göndermelidir. Ağınızdaki herhangi bir cihazdan gelen istekleri kabul etmek için boş bırakın.",
+        "regenerate": "Yeni anahtar",
+        "emptyWarning": "API anahtarı ayarlanmadığı için ağınızdaki her cihaz bu sunucuyu kullanabilir."
+      },
+      "connect": {
+        "title": "Bir Uygulama Bağlayın",
+        "running": "{{port}} portunda dinleniyor",
+        "starting": "Başlatılıyor...",
+        "baseUrl": "Temel URL",
+        "steps": {
+          "provider": "Uygulamanızda özel (OpenAI uyumlu) bir konuşmadan metne sağlayıcısı seçin.",
+          "baseUrl": "Temel URL: yukarıdaki adreslerden biri. Yerel DNS'inizin bu bilgisayara çözümlediği bir ad da çalışır.",
+          "apiKey": "API anahtarı: yukarıdaki anahtar. Model: herhangi bir değer; Handy her zaman seçili modelini kullanır."
+        },
+        "network": "Cihaz bu bilgisayarla aynı ağda olmalıdır. Güvenlik duvarınız Handy'nin bağlantı kabul edip edemeyeceğini sorarsa özel ağlarda izin verin."
+      },
+      "errors": {
+        "portInUse": "{{port}} portu zaten başka bir program tarafından kullanılıyor. Farklı bir port seçin.",
+        "portUnavailable": "Handy'nin {{port}} portunu kullanmasına izin verilmiyor. Windows bu portu Hyper-V veya WSL için ayırmış olabilir. Farklı bir port seçin.",
+        "failed": "API sunucusu başlatılamadı: {{message}}",
+        "invalidPort": "1 ile 65535 arasında bir port girin."
+      },
+      "copied": "Kopyalandı"
     },
     "debug": {
       "title": "Hata Ayıklama",

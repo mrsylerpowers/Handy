@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "一般",
     "transcribeFile": "轉錄檔案",
+    "apiServer": "API 伺服器",
     "models": "模型",
     "advanced": "進階",
     "postProcessing": "後處理",
@@ -499,6 +500,44 @@
         "noModel": "請先在「模型」頁面下載轉錄模型。",
         "startFailed": "無法開始轉錄此檔案。"
       }
+    },
+    "apiServer": {
+      "title": "API 伺服器",
+      "description": "讓其他裝置（例如手機上的聽寫 App）透過相容 OpenAI 的語音轉文字 API，使用所選模型（{{model}}）轉錄音訊。",
+      "descriptionNoModel": "讓其他裝置（例如手機上的聽寫 App）使用 Handy 轉錄音訊。請先在「模型」頁面下載轉錄模型。",
+      "enable": {
+        "label": "啟用 API 伺服器",
+        "description": "Handy 執行期間，接受來自同一網路中裝置的轉錄請求。"
+      },
+      "port": {
+        "title": "連接埠",
+        "description": "伺服器監聽的網路連接埠。"
+      },
+      "apiKey": {
+        "title": "API 金鑰",
+        "description": "App 必須傳送此金鑰。留空則接受網路中任何裝置的請求。",
+        "regenerate": "新金鑰",
+        "emptyWarning": "未設定 API 金鑰，網路中的任何裝置都能使用此伺服器。"
+      },
+      "connect": {
+        "title": "連接 App",
+        "running": "正在監聽連接埠 {{port}}",
+        "starting": "正在啟動...",
+        "baseUrl": "基礎網址",
+        "steps": {
+          "provider": "在 App 中選擇自訂（相容 OpenAI）的語音轉文字供應商。",
+          "baseUrl": "基礎網址：上方任一位址。本機 DNS 解析到這台電腦的名稱也可以使用。",
+          "apiKey": "API 金鑰：上方的金鑰。模型：任意；Handy 一律使用其所選模型。"
+        },
+        "network": "裝置必須與這台電腦位於同一網路。如果防火牆詢問是否允許 Handy 接受連線，請在私人網路上允許。"
+      },
+      "errors": {
+        "portInUse": "連接埠 {{port}} 已被其他程式使用。請選擇其他連接埠。",
+        "portUnavailable": "Handy 無權使用連接埠 {{port}}。Windows 可能已將其保留給 Hyper-V 或 WSL。請選擇其他連接埠。",
+        "failed": "無法啟動 API 伺服器：{{message}}",
+        "invalidPort": "請輸入 1 到 65535 之間的連接埠。"
+      },
+      "copied": "已複製"
     },
     "debug": {
       "title": "偵錯",

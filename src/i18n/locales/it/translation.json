@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Generale",
     "transcribeFile": "Trascrivi file",
+    "apiServer": "Server API",
     "models": "Modelli",
     "advanced": "Avanzate",
     "postProcessing": "Post-Elaborazione",
@@ -499,6 +500,44 @@
         "noModel": "Scarica prima un modello di trascrizione nella pagina Modelli.",
         "startFailed": "Impossibile avviare la trascrizione di questo file."
       }
+    },
+    "apiServer": {
+      "title": "Server API",
+      "description": "Consenti ad altri dispositivi, come un'app di dettatura sul telefono, di trascrivere l'audio con il modello selezionato ({{model}}) tramite un'API di riconoscimento vocale compatibile con OpenAI.",
+      "descriptionNoModel": "Consenti ad altri dispositivi, come un'app di dettatura sul telefono, di trascrivere l'audio con Handy. Scarica prima un modello di trascrizione nella pagina Modelli.",
+      "enable": {
+        "label": "Attiva server API",
+        "description": "Accetta richieste di trascrizione dai dispositivi della tua rete mentre Handy è in esecuzione."
+      },
+      "port": {
+        "title": "Porta",
+        "description": "La porta di rete su cui il server è in ascolto."
+      },
+      "apiKey": {
+        "title": "Chiave API",
+        "description": "Le app devono inviare questa chiave. Lasciala vuota per accettare richieste da qualsiasi dispositivo della tua rete.",
+        "regenerate": "Nuova chiave",
+        "emptyWarning": "Nessuna chiave API impostata: qualsiasi dispositivo della tua rete può usare questo server."
+      },
+      "connect": {
+        "title": "Collega un'app",
+        "running": "In ascolto sulla porta {{port}}",
+        "starting": "Avvio in corso...",
+        "baseUrl": "URL base",
+        "steps": {
+          "provider": "Nella tua app, scegli un provider di riconoscimento vocale personalizzato (compatibile con OpenAI).",
+          "baseUrl": "URL base: uno degli indirizzi qui sopra. Funziona anche un nome che il tuo DNS locale risolve verso questo computer.",
+          "apiKey": "Chiave API: la chiave qui sopra. Modello: qualsiasi; Handy usa sempre il modello selezionato."
+        },
+        "network": "Il dispositivo deve essere sulla stessa rete di questo computer. Se il firewall chiede se Handy può accettare connessioni, consentilo sulle reti private."
+      },
+      "errors": {
+        "portInUse": "La porta {{port}} è già in uso da un altro programma. Scegli una porta diversa.",
+        "portUnavailable": "Handy non può usare la porta {{port}}. Windows potrebbe riservarla per Hyper-V o WSL. Scegli una porta diversa.",
+        "failed": "Impossibile avviare il server API: {{message}}",
+        "invalidPort": "Inserisci una porta da 1 a 65535."
+      },
+      "copied": "Copiato"
     },
     "debug": {
       "title": "Debug",

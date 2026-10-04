@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Chung",
     "transcribeFile": "Phiên âm tệp",
+    "apiServer": "Máy chủ API",
     "models": "Mô hình",
     "advanced": "Nâng cao",
     "postProcessing": "Xử lý sau",
@@ -499,6 +500,44 @@
         "noModel": "Hãy tải xuống một mô hình phiên âm trong trang Mô hình trước.",
         "startFailed": "Không thể bắt đầu phiên âm tệp này."
       }
+    },
+    "apiServer": {
+      "title": "Máy chủ API",
+      "description": "Cho phép các thiết bị khác, như ứng dụng đọc chính tả trên điện thoại của bạn, phiên âm âm thanh bằng mô hình bạn đã chọn ({{model}}) qua API chuyển giọng nói thành văn bản tương thích với OpenAI.",
+      "descriptionNoModel": "Cho phép các thiết bị khác, như ứng dụng đọc chính tả trên điện thoại của bạn, phiên âm âm thanh bằng Handy. Hãy tải xuống một mô hình phiên âm trong trang Mô hình trước.",
+      "enable": {
+        "label": "Bật máy chủ API",
+        "description": "Nhận yêu cầu phiên âm từ các thiết bị trong mạng của bạn khi Handy đang chạy."
+      },
+      "port": {
+        "title": "Cổng",
+        "description": "Cổng mạng mà máy chủ lắng nghe."
+      },
+      "apiKey": {
+        "title": "Khóa API",
+        "description": "Ứng dụng phải gửi khóa này. Để trống để nhận yêu cầu từ bất kỳ thiết bị nào trong mạng của bạn.",
+        "regenerate": "Khóa mới",
+        "emptyWarning": "Chưa đặt khóa API, vì vậy bất kỳ thiết bị nào trong mạng của bạn cũng có thể dùng máy chủ này."
+      },
+      "connect": {
+        "title": "Kết nối ứng dụng",
+        "running": "Đang lắng nghe trên cổng {{port}}",
+        "starting": "Đang khởi động...",
+        "baseUrl": "URL cơ sở",
+        "steps": {
+          "provider": "Trong ứng dụng, chọn nhà cung cấp chuyển giọng nói thành văn bản tùy chỉnh (tương thích với OpenAI).",
+          "baseUrl": "URL cơ sở: một trong các địa chỉ ở trên. Tên mà DNS cục bộ của bạn phân giải tới máy tính này cũng dùng được.",
+          "apiKey": "Khóa API: khóa ở trên. Mô hình: giá trị bất kỳ; Handy luôn dùng mô hình đã chọn của nó."
+        },
+        "network": "Thiết bị phải ở cùng mạng với máy tính này. Nếu tường lửa hỏi Handy có được nhận kết nối không, hãy cho phép trên mạng riêng."
+      },
+      "errors": {
+        "portInUse": "Cổng {{port}} đang được một chương trình khác sử dụng. Hãy chọn cổng khác.",
+        "portUnavailable": "Handy không được phép dùng cổng {{port}}. Có thể Windows đã dành riêng cổng này cho Hyper-V hoặc WSL. Hãy chọn cổng khác.",
+        "failed": "Không thể khởi động máy chủ API: {{message}}",
+        "invalidPort": "Nhập cổng từ 1 đến 65535."
+      },
+      "copied": "Đã sao chép"
     },
     "debug": {
       "title": "Gỡ lỗi",

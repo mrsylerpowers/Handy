@@ -936,6 +936,55 @@ async saveTranscriptFile(path: string, text: string) : Promise<Result<null, stri
     else return { status: "error", error: e  as any };
 }
 },
+async getApiServerStatus() : Promise<ApiServerStatus> {
+    return await TAURI_INVOKE("get_api_server_status");
+},
+/**
+ * Turn the API server on or off. Turning it on for the first time also
+ * generates its API key. Returns once the server has started or stopped.
+ */
+async changeApiServerEnabledSetting(enabled: boolean) : Promise<Result<ApiServerStatus, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_api_server_enabled_setting", { enabled }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Move the API server to another port, restarting it if it is running.
+ */
+async changeApiServerPortSetting(port: number) : Promise<Result<ApiServerStatus, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_api_server_port_setting", { port }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Set the key API clients must present; empty means none is required. Takes
+ * effect with the next request.
+ */
+async changeApiServerKeySetting(key: string) : Promise<Result<null, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("change_api_server_key_setting", { key }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
+/**
+ * Replace the API key with a new random one, which is returned.
+ */
+async regenerateApiServerKey() : Promise<Result<string, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("regenerate_api_server_key") };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 /**
  * Checks if the Mac is a laptop by detecting battery presence
  * 
@@ -956,11 +1005,13 @@ async isLaptop() : Promise<Result<boolean, string>> {
 
 
 export const events = __makeEvents__<{
+apiServerStatus: ApiServerStatus,
 fileTranscriptionEvent: FileTranscriptionEvent,
 historyUpdatePayload: HistoryUpdatePayload,
 streamPhaseEvent: StreamPhaseEvent,
 streamTextEvent: StreamTextEvent
 }>({
+apiServerStatus: "api-server-status",
 fileTranscriptionEvent: "file-transcription-event",
 historyUpdatePayload: "history-update-payload",
 streamPhaseEvent: "stream-phase-event",
@@ -973,6 +1024,30 @@ streamTextEvent: "stream-text-event"
 
 /** user-defined types **/
 
+export type ApiServerError =
+/**
+ * Another program is listening on the port.
+ */
+{ kind: "port_in_use" } |
+/**
+ * Windows reserves the port (e.g. for Hyper-V or WSL) or access to it
+ * is denied.
+ */
+{ kind: "port_unavailable" } | { kind: "failed"; message: string }
+/**
+ * Whether the server is listening, and the base URLs clients can use.
+ * Emitted whenever it changes.
+ */
+export type ApiServerStatus = { running: boolean; port: number; 
+/**
+ * Base URLs for a client app: by this computer's network address, then
+ * by its name.
+ */
+base_urls: string[]; 
+/**
+ * Why the server is not running although it is enabled.
+ */
+error: ApiServerError | null }
 /**
  * The container-level `serde(default)` (backed by the `Default` impl below)
  * guarantees every field — including ones added in the future — falls back to
@@ -1035,7 +1110,17 @@ vad_backend?: VadBackend;
  * not gated on this — that follows model capability. Migrated from the old
  * `overlay_position` (position `none` → style `None`).
  */
-overlay_style?: OverlayStyle }
+overlay_style?: OverlayStyle; 
+/**
+ * Serve transcription to other devices (e.g. a phone dictation app) over
+ * an OpenAI-compatible HTTP API; see `api_server`.
+ */
+api_server_enabled?: boolean; api_server_port?: number; 
+/**
+ * The key API clients must present. Generated when the server is first
+ * enabled; empty means requests need no key.
+ */
+api_server_key?: SecretString }
 export type AudioDevice = { index: string; name: string; is_default: boolean }
 export type AutoSubmitKey = "enter" | "ctrl_enter" | "cmd_enter"
 export type AvailableAccelerators = { transcribe: string[]; ort: string[]; gpu_devices: GpuDeviceOption[] }
@@ -1126,6 +1211,10 @@ export type PermissionAccess = "allowed" | "denied" | "unknown"
 export type PostProcessProvider = { id: string; label: string; base_url: string; allow_base_url_edit?: boolean; models_endpoint?: string | null; supports_structured_output?: boolean }
 export type RecordingRetentionPeriod = "never" | "preserve_limit" | "days_3" | "weeks_2" | "months_3"
 export type SecretMap = Partial<{ [key in string]: string }>
+/**
+ * A secret string setting, redacted from `Debug` output like [`SecretMap`].
+ */
+export type SecretString = string
 export type SecureInputStatus = { 
 /**
  * Secure input is currently enabled (live check)

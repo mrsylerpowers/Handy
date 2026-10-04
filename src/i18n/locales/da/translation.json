@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Generelt",
     "transcribeFile": "Transskriber fil",
+    "apiServer": "API-server",
     "models": "Modeller",
     "advanced": "Avanceret",
     "postProcessing": "Efterbehandling",
@@ -499,6 +500,44 @@
         "noModel": "Download først en transskriptionsmodel på siden Modeller.",
         "startFailed": "Kunne ikke starte transskriptionen af denne fil."
       }
+    },
+    "apiServer": {
+      "title": "API-server",
+      "description": "Lad andre enheder, f.eks. en dikteringsapp på din telefon, transskribere lyd med din valgte model ({{model}}) via en OpenAI-kompatibel tale-til-tekst-API.",
+      "descriptionNoModel": "Lad andre enheder, f.eks. en dikteringsapp på din telefon, transskribere lyd med Handy. Download først en transskriptionsmodel på siden Modeller.",
+      "enable": {
+        "label": "Aktivér API-server",
+        "description": "Modtag transskriptionsanmodninger fra enheder på dit netværk, mens Handy kører."
+      },
+      "port": {
+        "title": "Port",
+        "description": "Den netværksport, serveren lytter på."
+      },
+      "apiKey": {
+        "title": "API-nøgle",
+        "description": "Apps skal sende denne nøgle. Lad den være tom for at modtage anmodninger fra alle enheder på dit netværk.",
+        "regenerate": "Ny nøgle",
+        "emptyWarning": "Der er ikke angivet nogen API-nøgle, så alle enheder på dit netværk kan bruge denne server."
+      },
+      "connect": {
+        "title": "Forbind en app",
+        "running": "Lytter på port {{port}}",
+        "starting": "Starter...",
+        "baseUrl": "Basis-URL",
+        "steps": {
+          "provider": "Vælg en brugerdefineret (OpenAI-kompatibel) tale-til-tekst-udbyder i din app.",
+          "baseUrl": "Basis-URL: en af adresserne ovenfor. Et navn, som din lokale DNS peger på denne computer, virker også.",
+          "apiKey": "API-nøgle: nøglen ovenfor. Model: hvad som helst; Handy bruger altid sin valgte model."
+        },
+        "network": "Enheden skal være på samme netværk som denne computer. Hvis din firewall spørger, om Handy må modtage forbindelser, så tillad det på private netværk."
+      },
+      "errors": {
+        "portInUse": "Port {{port}} bruges allerede af et andet program. Vælg en anden port.",
+        "portUnavailable": "Handy må ikke bruge port {{port}}. Windows reserverer den muligvis til Hyper-V eller WSL. Vælg en anden port.",
+        "failed": "API-serveren kunne ikke starte: {{message}}",
+        "invalidPort": "Angiv en port fra 1 til 65535."
+      },
+      "copied": "Kopieret"
     },
     "debug": {
       "title": "Fejlfinding",

@@ -8,6 +8,7 @@ import {
   Info,
   Sparkles,
   Cpu,
+  Server,
 } from "lucide-react";
 import HandyTextLogo from "./icons/HandyTextLogo";
 import HandyHand from "./icons/HandyHand";
@@ -21,6 +22,7 @@ import {
   PostProcessingSettings,
   ModelsSettings,
   TranscribeFileSettings,
+  ApiServerSettings,
 } from "./settings";
 
 export type SidebarSection = keyof typeof SECTIONS_CONFIG;
@@ -51,6 +53,12 @@ export const SECTIONS_CONFIG = {
     labelKey: "sidebar.transcribeFile",
     icon: FileAudio,
     component: TranscribeFileSettings,
+    enabled: () => true,
+  },
+  apiServer: {
+    labelKey: "sidebar.apiServer",
+    icon: Server,
+    component: ApiServerSettings,
     enabled: () => true,
   },
   history: {

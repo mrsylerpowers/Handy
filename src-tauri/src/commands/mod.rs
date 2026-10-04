@@ -1,3 +1,4 @@
+pub mod api_server;
 pub mod audio;
 pub mod file_transcription;
 pub mod history;

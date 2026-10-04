@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Allgemein",
     "transcribeFile": "Datei transkribieren",
+    "apiServer": "API-Server",
     "models": "Modelle",
     "advanced": "Erweitert",
     "postProcessing": "Nachbearbeitung",
@@ -499,6 +500,44 @@
         "noModel": "Lade zuerst unter Modelle ein Transkriptionsmodell herunter.",
         "startFailed": "Die Transkription dieser Datei konnte nicht gestartet werden."
       }
+    },
+    "apiServer": {
+      "title": "API-Server",
+      "description": "Lass andere Geräte, etwa eine Diktier-App auf deinem Smartphone, Audio mit deinem ausgewählten Modell ({{model}}) über eine OpenAI-kompatible Speech-to-Text-API transkribieren.",
+      "descriptionNoModel": "Lass andere Geräte, etwa eine Diktier-App auf deinem Smartphone, Audio mit Handy transkribieren. Lade zuerst unter Modelle ein Transkriptionsmodell herunter.",
+      "enable": {
+        "label": "API-Server aktivieren",
+        "description": "Nimm Transkriptionsanfragen von Geräten in deinem Netzwerk an, solange Handy läuft."
+      },
+      "port": {
+        "title": "Port",
+        "description": "Der Netzwerk-Port, auf dem der Server lauscht."
+      },
+      "apiKey": {
+        "title": "API-Schlüssel",
+        "description": "Apps müssen diesen Schlüssel senden. Lass ihn leer, um Anfragen von jedem Gerät in deinem Netzwerk anzunehmen.",
+        "regenerate": "Neuer Schlüssel",
+        "emptyWarning": "Es ist kein API-Schlüssel festgelegt, daher kann jedes Gerät in deinem Netzwerk diesen Server nutzen."
+      },
+      "connect": {
+        "title": "App verbinden",
+        "running": "Lauscht auf Port {{port}}",
+        "starting": "Wird gestartet...",
+        "baseUrl": "Basis-URL",
+        "steps": {
+          "provider": "Wähle in deiner App einen benutzerdefinierten (OpenAI-kompatiblen) Speech-to-Text-Anbieter.",
+          "baseUrl": "Basis-URL: eine der Adressen oben. Ein Name, den dein lokales DNS zu diesem Computer auflöst, funktioniert auch.",
+          "apiKey": "API-Schlüssel: der Schlüssel oben. Modell: beliebig; Handy verwendet immer sein ausgewähltes Modell."
+        },
+        "network": "Das Gerät muss im selben Netzwerk wie dieser Computer sein. Wenn deine Firewall fragt, ob Handy Verbindungen annehmen darf, erlaube es für private Netzwerke."
+      },
+      "errors": {
+        "portInUse": "Port {{port}} wird bereits von einem anderen Programm verwendet. Wähle einen anderen Port.",
+        "portUnavailable": "Handy darf Port {{port}} nicht verwenden. Windows reserviert ihn möglicherweise für Hyper-V oder WSL. Wähle einen anderen Port.",
+        "failed": "Der API-Server konnte nicht starten: {{message}}",
+        "invalidPort": "Gib einen Port von 1 bis 65535 ein."
+      },
+      "copied": "Kopiert"
     },
     "debug": {
       "title": "Debug",

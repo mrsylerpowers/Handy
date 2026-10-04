@@ -61,3 +61,5 @@ write("tone.ogg", "ogg", "vorbis", 44100, "stereo", options={"strict": "experime
 write("tone.flac", "flac", "flac", 22050, "mono")
 write("video.mp4", "mp4", "aac", 48000, "mono", bit_rate=48000, video=True)
 write("tone.opus", "ogg", "libopus", 48000, "mono", bit_rate=24000)
+write("tone.caf", "caf", "pcm_s16le", 48000, "mono")
+write("tone_alac.m4a", "ipod", "alac", 44100, "mono")

@@ -405,7 +405,7 @@ pub(crate) struct ProcessedTranscription {
 /// paths apply (see [`crate::managers::model::effective_language`]). Post-processing
 /// resolves it independently so it agrees with the language the transcription ran
 /// in, without threading a value through the pipeline.
-fn resolve_effective_language(app: &AppHandle, settings: &AppSettings) -> String {
+pub(crate) fn resolve_effective_language(app: &AppHandle, settings: &AppSettings) -> String {
     let tm = app.state::<Arc<TranscriptionManager>>();
     let model_manager = app.state::<Arc<ModelManager>>();
     let active_model = tm

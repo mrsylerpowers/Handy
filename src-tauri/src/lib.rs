@@ -1,4 +1,5 @@
 mod actions;
+mod api_server;
 #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
 mod apple_intelligence;
 mod audio_feedback;
@@ -31,6 +32,7 @@ use specta_typescript::{BigIntExportBehavior, Typescript};
 use tauri_specta::{collect_commands, collect_events, Builder};
 pub use utils::env_flag_enabled;
 
+use api_server::ApiServerManager;
 use env_filter::Builder as EnvFilterBuilder;
 use managers::audio::AudioRecordingManager;
 use managers::file_transcription::FileTranscriptionManager;
@@ -206,6 +208,7 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     let history_manager =
         Arc::new(HistoryManager::new(app_handle).expect("Failed to initialize history manager"));
     let file_transcription_manager = Arc::new(FileTranscriptionManager::new(app_handle));
+    let api_server_manager = Arc::new(ApiServerManager::new(app_handle));
 
     // Initialize the transcribe-cpp native backend (logging + backend module
     // registration) once, before any whisper model is loaded.
@@ -220,6 +223,7 @@ fn initialize_core_logic(app_handle: &AppHandle) {
     app_handle.manage(transcription_manager.clone());
     app_handle.manage(history_manager.clone());
     app_handle.manage(file_transcription_manager);
+    app_handle.manage(api_server_manager.clone());
     app_handle.manage(tray::TrayState::new());
 
     // Note: Shortcuts are NOT initialized here.
@@ -371,6 +375,12 @@ fn initialize_core_logic(app_handle: &AppHandle) {
 
     // Create the recording overlay window (hidden by default)
     utils::create_recording_overlay(app_handle);
+
+    // Start the API server if it is enabled. Managers are all registered by
+    // now, so requests can be served as soon as it listens.
+    tauri::async_runtime::spawn(async move {
+        api_server_manager.apply_settings().await;
+    });
 }
 
 #[tauri::command]
@@ -760,9 +770,15 @@ pub fn run(cli_args: CliArgs) {
             commands::file_transcription::start_file_transcription,
             commands::file_transcription::cancel_file_transcription,
             commands::file_transcription::save_transcript_file,
+            commands::api_server::get_api_server_status,
+            commands::api_server::change_api_server_enabled_setting,
+            commands::api_server::change_api_server_port_setting,
+            commands::api_server::change_api_server_key_setting,
+            commands::api_server::regenerate_api_server_key,
             helpers::clamshell::is_laptop,
         ])
         .events(collect_events![
+            api_server::ApiServerStatus,
             managers::history::HistoryUpdatePayload,
             managers::transcription::StreamTextEvent,
             managers::transcription::StreamPhaseEvent,

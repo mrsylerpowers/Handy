@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Allmänt",
     "transcribeFile": "Transkribera fil",
+    "apiServer": "API-server",
     "models": "Modeller",
     "advanced": "Avancerat",
     "postProcessing": "Efterbearbetning",
@@ -499,6 +500,44 @@
         "noModel": "Ladda först ner en transkriptionsmodell på sidan Modeller.",
         "startFailed": "Det gick inte att starta transkriberingen av den här filen."
       }
+    },
+    "apiServer": {
+      "title": "API-server",
+      "description": "Låt andra enheter, till exempel en dikteringsapp i din telefon, transkribera ljud med din valda modell ({{model}}) via ett OpenAI-kompatibelt tal-till-text-API.",
+      "descriptionNoModel": "Låt andra enheter, till exempel en dikteringsapp i din telefon, transkribera ljud med Handy. Ladda först ner en transkriptionsmodell på sidan Modeller.",
+      "enable": {
+        "label": "Aktivera API-server",
+        "description": "Ta emot transkriptionsförfrågningar från enheter i ditt nätverk medan Handy körs."
+      },
+      "port": {
+        "title": "Port",
+        "description": "Nätverksporten som servern lyssnar på."
+      },
+      "apiKey": {
+        "title": "API-nyckel",
+        "description": "Appar måste skicka den här nyckeln. Lämna den tom för att ta emot förfrågningar från alla enheter i ditt nätverk.",
+        "regenerate": "Ny nyckel",
+        "emptyWarning": "Ingen API-nyckel är angiven, så alla enheter i ditt nätverk kan använda den här servern."
+      },
+      "connect": {
+        "title": "Anslut en app",
+        "running": "Lyssnar på port {{port}}",
+        "starting": "Startar...",
+        "baseUrl": "Bas-URL",
+        "steps": {
+          "provider": "Välj en anpassad (OpenAI-kompatibel) tal-till-text-leverantör i din app.",
+          "baseUrl": "Bas-URL: en av adresserna ovan. Ett namn som din lokala DNS pekar mot den här datorn fungerar också.",
+          "apiKey": "API-nyckel: nyckeln ovan. Modell: vad som helst; Handy använder alltid sin valda modell."
+        },
+        "network": "Enheten måste vara i samma nätverk som den här datorn. Om brandväggen frågar om Handy får ta emot anslutningar, tillåt det i privata nätverk."
+      },
+      "errors": {
+        "portInUse": "Port {{port}} används redan av ett annat program. Välj en annan port.",
+        "portUnavailable": "Handy får inte använda port {{port}}. Windows kan ha reserverat den för Hyper-V eller WSL. Välj en annan port.",
+        "failed": "API-servern kunde inte starta: {{message}}",
+        "invalidPort": "Ange en port från 1 till 65535."
+      },
+      "copied": "Kopierat"
     },
     "debug": {
       "title": "Felsökning",

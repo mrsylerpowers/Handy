@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Algemeen",
     "transcribeFile": "Bestand transcriberen",
+    "apiServer": "API-server",
     "models": "Modellen",
     "advanced": "Geavanceerd",
     "postProcessing": "Naverwerking",
@@ -499,6 +500,44 @@
         "noModel": "Download eerst een transcriptiemodel op de pagina Modellen.",
         "startFailed": "Kan het transcriberen van dit bestand niet starten."
       }
+    },
+    "apiServer": {
+      "title": "API-server",
+      "description": "Laat andere apparaten, zoals een dicteer-app op je telefoon, audio transcriberen met je geselecteerde model ({{model}}) via een OpenAI-compatibele spraak-naar-tekst-API.",
+      "descriptionNoModel": "Laat andere apparaten, zoals een dicteer-app op je telefoon, audio transcriberen met Handy. Download eerst een transcriptiemodel op de pagina Modellen.",
+      "enable": {
+        "label": "API-server inschakelen",
+        "description": "Accepteer transcriptieverzoeken van apparaten in je netwerk zolang Handy draait."
+      },
+      "port": {
+        "title": "Poort",
+        "description": "De netwerkpoort waarop de server luistert."
+      },
+      "apiKey": {
+        "title": "API-sleutel",
+        "description": "Apps moeten deze sleutel meesturen. Laat hem leeg om verzoeken van elk apparaat in je netwerk te accepteren.",
+        "regenerate": "Nieuwe sleutel",
+        "emptyWarning": "Er is geen API-sleutel ingesteld, dus elk apparaat in je netwerk kan deze server gebruiken."
+      },
+      "connect": {
+        "title": "Een app verbinden",
+        "running": "Luistert op poort {{port}}",
+        "starting": "Bezig met starten...",
+        "baseUrl": "Basis-URL",
+        "steps": {
+          "provider": "Kies in je app een aangepaste (OpenAI-compatibele) spraak-naar-tekst-provider.",
+          "baseUrl": "Basis-URL: een van de adressen hierboven. Een naam die je lokale DNS naar deze computer laat verwijzen werkt ook.",
+          "apiKey": "API-sleutel: de sleutel hierboven. Model: maakt niet uit; Handy gebruikt altijd zijn geselecteerde model."
+        },
+        "network": "Het apparaat moet in hetzelfde netwerk zitten als deze computer. Als je firewall vraagt of Handy verbindingen mag accepteren, sta dit toe voor privénetwerken."
+      },
+      "errors": {
+        "portInUse": "Poort {{port}} wordt al door een ander programma gebruikt. Kies een andere poort.",
+        "portUnavailable": "Handy mag poort {{port}} niet gebruiken. Mogelijk reserveert Windows deze voor Hyper-V of WSL. Kies een andere poort.",
+        "failed": "De API-server kon niet starten: {{message}}",
+        "invalidPort": "Voer een poort van 1 tot 65535 in."
+      },
+      "copied": "Gekopieerd"
     },
     "debug": {
       "title": "Probleemoplossing",

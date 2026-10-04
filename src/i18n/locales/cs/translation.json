@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "Obecné",
     "transcribeFile": "Přepsat soubor",
+    "apiServer": "API server",
     "models": "Modely",
     "advanced": "Pokročilé",
     "postProcessing": "Následné zpracování",
@@ -499,6 +500,44 @@
         "noModel": "Nejprve si na stránce Modely stáhněte model pro přepis.",
         "startFailed": "Přepis tohoto souboru se nepodařilo spustit."
       }
+    },
+    "apiServer": {
+      "title": "API server",
+      "description": "Umožněte jiným zařízením, například diktovací aplikaci v telefonu, přepisovat zvuk pomocí vybraného modelu ({{model}}) přes API pro převod řeči na text kompatibilní s OpenAI.",
+      "descriptionNoModel": "Umožněte jiným zařízením, například diktovací aplikaci v telefonu, přepisovat zvuk pomocí Handy. Nejprve si na stránce Modely stáhněte model pro přepis.",
+      "enable": {
+        "label": "Zapnout API server",
+        "description": "Přijímat požadavky na přepis ze zařízení ve vaší síti, dokud Handy běží."
+      },
+      "port": {
+        "title": "Port",
+        "description": "Síťový port, na kterém server naslouchá."
+      },
+      "apiKey": {
+        "title": "API klíč",
+        "description": "Aplikace musí tento klíč odesílat. Ponechte ho prázdný, chcete-li přijímat požadavky z jakéhokoli zařízení ve vaší síti.",
+        "regenerate": "Nový klíč",
+        "emptyWarning": "Není nastaven žádný API klíč, takže tento server může používat jakékoli zařízení ve vaší síti."
+      },
+      "connect": {
+        "title": "Připojit aplikaci",
+        "running": "Naslouchá na portu {{port}}",
+        "starting": "Spouštění...",
+        "baseUrl": "Základní URL",
+        "steps": {
+          "provider": "V aplikaci zvolte vlastního (s OpenAI kompatibilního) poskytovatele převodu řeči na text.",
+          "baseUrl": "Základní URL: jedna z adres výše. Funguje i název, který váš místní DNS překládá na tento počítač.",
+          "apiKey": "API klíč: klíč výše. Model: libovolný; Handy vždy používá svůj vybraný model."
+        },
+        "network": "Zařízení musí být ve stejné síti jako tento počítač. Pokud se brána firewall zeptá, zda může Handy přijímat připojení, povolte to pro soukromé sítě."
+      },
+      "errors": {
+        "portInUse": "Port {{port}} už používá jiný program. Zvolte jiný port.",
+        "portUnavailable": "Handy nesmí používat port {{port}}. Windows ho může mít vyhrazený pro Hyper-V nebo WSL. Zvolte jiný port.",
+        "failed": "API server se nepodařilo spustit: {{message}}",
+        "invalidPort": "Zadejte port od 1 do 65535."
+      },
+      "copied": "Zkopírováno"
     },
     "debug": {
       "title": "Ladění",

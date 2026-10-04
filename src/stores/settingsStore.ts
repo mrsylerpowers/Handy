@@ -194,6 +194,20 @@ const settingUpdaters: {
     commands.changeTranscribeGpuDevice(value as string | null),
   extra_recording_buffer_ms: (value) =>
     commands.changeExtraRecordingBufferSetting(value as number),
+  api_server_enabled: async (value) => {
+    const result = await commands.changeApiServerEnabledSetting(
+      value as boolean,
+    );
+    if (result.status === "error") throw new Error(result.error);
+  },
+  api_server_port: async (value) => {
+    const result = await commands.changeApiServerPortSetting(value as number);
+    if (result.status === "error") throw new Error(result.error);
+  },
+  api_server_key: async (value) => {
+    const result = await commands.changeApiServerKeySetting(value as string);
+    if (result.status === "error") throw new Error(result.error);
+  },
 };
 
 export const useSettingsStore = create<SettingsStore>()(

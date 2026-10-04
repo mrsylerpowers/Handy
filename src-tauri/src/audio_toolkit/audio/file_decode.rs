@@ -3,13 +3,14 @@
 
 use anyhow::{anyhow, bail, Context, Result};
 use log::{debug, warn};
+use std::io::Cursor;
 use std::path::Path;
 use std::time::Duration;
 use symphonia::core::audio::SampleBuffer;
 use symphonia::core::codecs::{DecoderOptions, CODEC_TYPE_NULL};
 use symphonia::core::errors::Error as SymphoniaError;
 use symphonia::core::formats::FormatOptions;
-use symphonia::core::io::MediaSourceStream;
+use symphonia::core::io::{MediaSource, MediaSourceStream};
 use symphonia::core::meta::MetadataOptions;
 use symphonia::core::probe::Hint;
 
@@ -18,17 +19,30 @@ use crate::audio_toolkit::constants::WHISPER_SAMPLE_RATE;
 
 /// Decode the first playable audio track of `path` to 16 kHz mono.
 ///
-/// Supports whatever the bundled symphonia decoders cover: WAV, AIFF, MP3,
-/// AAC/M4A (and the AAC audio of MP4/MOV video), FLAC and Ogg Vorbis. Audio is
-/// resampled as it decodes, so memory stays proportional to the 16 kHz output
-/// rather than the source rate.
+/// Supports whatever the bundled symphonia decoders cover: WAV, AIFF, CAF,
+/// MP3, AAC/M4A (and the AAC audio of MP4/MOV video), Apple Lossless, FLAC and
+/// Ogg Vorbis. Audio is resampled as it decodes, so memory stays proportional
+/// to the 16 kHz output rather than the source rate.
 pub fn decode_audio_file(path: &Path) -> Result<Vec<f32>> {
     let file =
         std::fs::File::open(path).with_context(|| format!("Cannot open {}", path.display()))?;
-    let stream = MediaSourceStream::new(Box::new(file), Default::default());
+    let extension = path.extension().and_then(|e| e.to_str());
+    decode(Box::new(file), extension, &path.display().to_string())
+}
+
+/// Like [`decode_audio_file`], for a file held in memory (e.g. an upload).
+/// `extension`, taken from the file's name if it has one, is only a hint: the
+/// container is recognized from the data itself.
+pub fn decode_audio_bytes(bytes: Vec<u8>, extension: Option<&str>) -> Result<Vec<f32>> {
+    decode(Box::new(Cursor::new(bytes)), extension, "uploaded audio")
+}
+
+/// `label` names the source in log messages.
+fn decode(source: Box<dyn MediaSource>, extension: Option<&str>, label: &str) -> Result<Vec<f32>> {
+    let stream = MediaSourceStream::new(source, Default::default());
 
     let mut hint = Hint::new();
-    if let Some(extension) = path.extension().and_then(|e| e.to_str()) {
+    if let Some(extension) = extension {
         hint.with_extension(extension);
     }
     let probed = symphonia::default::get_probe()
@@ -123,9 +137,7 @@ pub fn decode_audio_file(path: &Path) -> Result<Vec<f32>> {
             source_rate = spec.rate;
             debug!(
                 "Decoding {}: {} Hz, {} channel(s)",
-                path.display(),
-                spec.rate,
-                channels
+                label, spec.rate, channels
             );
             FrameResampler::new(
                 spec.rate as usize,
@@ -231,6 +243,47 @@ mod tests {
             let samples = decode_audio_file(&path).unwrap_or_else(|e| panic!("{name}: {e:#}"));
             assert_one_second_tone(name, &samples);
         }
+    }
+
+    #[test]
+    fn iphone_recording_formats_decode_to_16k_mono() {
+        // iPhone apps commonly record linear PCM in a CAF container, or Apple
+        // Lossless in M4A.
+        let dir = tempfile::tempdir().unwrap();
+        let fixtures: [(&str, &[u8]); 2] = [
+            ("tone.caf", include_bytes!("testdata/tone.caf")), // 48 kHz PCM
+            ("tone_alac.m4a", include_bytes!("testdata/tone_alac.m4a")), // 44.1 kHz
+        ];
+        for (name, bytes) in fixtures {
+            let path = write_temp(&dir, name, bytes);
+            let samples = decode_audio_file(&path).unwrap_or_else(|e| panic!("{name}: {e:#}"));
+            assert_one_second_tone(name, &samples);
+        }
+    }
+
+    #[test]
+    fn uploaded_bytes_decode_to_16k_mono() {
+        let bytes = include_bytes!("testdata/tone.m4a").to_vec();
+        let samples = decode_audio_bytes(bytes, Some("m4a")).unwrap();
+        assert_one_second_tone("tone.m4a bytes", &samples);
+    }
+
+    #[test]
+    fn uploaded_bytes_are_recognized_by_content_not_name() {
+        // Uploads can arrive unnamed ("blob") or misnamed; the container is
+        // then recognized from the data itself.
+        for extension in [None, Some("wav")] {
+            let bytes = include_bytes!("testdata/tone.m4a").to_vec();
+            let samples = decode_audio_bytes(bytes, extension)
+                .unwrap_or_else(|e| panic!("extension {extension:?}: {e:#}"));
+            assert_one_second_tone("tone.m4a bytes", &samples);
+        }
+    }
+
+    #[test]
+    fn uploaded_non_audio_bytes_are_an_error() {
+        let bytes = b"{\"error\": \"this is JSON, not audio\"}".to_vec();
+        assert!(decode_audio_bytes(bytes, Some("wav")).is_err());
     }
 
     #[test]

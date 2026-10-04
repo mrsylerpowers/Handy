@@ -347,6 +347,31 @@ impl std::ops::Deref for SecretMap {
     }
 }
 
+/// A secret string setting, redacted from `Debug` output like [`SecretMap`].
+#[derive(Clone, Default, PartialEq, Eq, Serialize, Deserialize, Type)]
+#[serde(transparent)]
+pub(crate) struct SecretString(String);
+
+impl fmt::Debug for SecretString {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let shown = if self.0.is_empty() { "" } else { "[REDACTED]" };
+        shown.fmt(f)
+    }
+}
+
+impl From<String> for SecretString {
+    fn from(value: String) -> Self {
+        Self(value)
+    }
+}
+
+impl std::ops::Deref for SecretString {
+    type Target = str;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 impl std::ops::DerefMut for SecretMap {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.0
@@ -514,6 +539,16 @@ pub struct AppSettings {
     /// `overlay_position` (position `none` → style `None`).
     #[serde(default = "default_overlay_style")]
     pub overlay_style: OverlayStyle,
+    /// Serve transcription to other devices (e.g. a phone dictation app) over
+    /// an OpenAI-compatible HTTP API; see `api_server`.
+    #[serde(default)]
+    pub api_server_enabled: bool,
+    #[serde(default = "default_api_server_port")]
+    pub api_server_port: u16,
+    /// The key API clients must present. Generated when the server is first
+    /// enabled; empty means requests need no key.
+    #[serde(default)]
+    pub api_server_key: SecretString,
 }
 
 fn default_model() -> String {
@@ -536,6 +571,12 @@ fn default_always_on_microphone() -> bool {
 
 fn default_translate_to_english() -> bool {
     false
+}
+
+/// "HANDY" on a phone keypad. Below Windows' dynamic port range (49152+),
+/// where Hyper-V and WSL port reservations usually land.
+fn default_api_server_port() -> u16 {
+    42639
 }
 
 fn default_start_hidden() -> bool {
@@ -970,6 +1011,9 @@ pub fn get_default_settings() -> AppSettings {
         vad_enabled: default_vad_enabled(),
         vad_backend: VadBackend::default(),
         overlay_style: default_overlay_style(),
+        api_server_enabled: false,
+        api_server_port: default_api_server_port(),
+        api_server_key: SecretString::default(),
     }
 }
 
@@ -1402,6 +1446,8 @@ mod tests {
         assert_eq!(settings.sound_theme, SoundTheme::Pop);
         assert!(settings.filler_word_removal_enabled);
         assert_eq!(settings.vad_backend, VadBackend::Silero);
+        // Upgrading must never expose the API server on the network.
+        assert!(!settings.api_server_enabled);
 
         // The 0.1 integer device index is cleared once for transcribe.cpp 0.2.
         // Without an exact device, the retired generic GPU choice becomes Auto.
@@ -1721,12 +1767,30 @@ mod tests {
         settings
             .post_process_api_keys
             .insert("empty_provider".to_string(), "".to_string());
+        settings.api_server_key = SecretString::from("k7mp-x2qa-9fzt-w4hd".to_string());
 
         let debug_output = format!("{:?}", settings);
 
         assert!(!debug_output.contains("sk-proj-secret-key-12345"));
         assert!(!debug_output.contains("sk-ant-secret-key-67890"));
+        assert!(!debug_output.contains("k7mp-x2qa-9fzt-w4hd"));
         assert!(debug_output.contains("[REDACTED]"));
+    }
+
+    #[test]
+    fn secret_string_debug_redacts_only_a_set_value() {
+        let set = SecretString::from("secret".to_string());
+        assert_eq!(format!("{:?}", set), "\"[REDACTED]\"");
+        assert_eq!(format!("{:?}", SecretString::default()), "\"\"");
+    }
+
+    #[test]
+    fn secret_string_stores_as_a_plain_string() {
+        // The frontend reads and writes the key as an ordinary string.
+        let key = SecretString::from("k7mp-x2qa".to_string());
+        assert_eq!(serde_json::to_value(&key).unwrap(), "k7mp-x2qa");
+        let parsed: SecretString = serde_json::from_value(serde_json::json!("k7mp-x2qa")).unwrap();
+        assert_eq!(&*parsed, "k7mp-x2qa");
     }
 
     #[test]

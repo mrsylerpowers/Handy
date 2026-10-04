@@ -12,6 +12,7 @@
   "sidebar": {
     "general": "General",
     "transcribeFile": "Transcribe File",
+    "apiServer": "API Server",
     "models": "Models",
     "advanced": "Advanced",
     "postProcessing": "Post Process",
@@ -499,6 +500,44 @@
         "noModel": "Download a transcription model on the Models page first.",
         "startFailed": "Could not start transcribing this file."
       }
+    },
+    "apiServer": {
+      "title": "API Server",
+      "description": "Let other devices, like a dictation app on your phone, transcribe audio with your selected model ({{model}}) through an OpenAI-compatible speech-to-text API.",
+      "descriptionNoModel": "Let other devices, like a dictation app on your phone, transcribe audio with Handy. Download a transcription model on the Models page first.",
+      "enable": {
+        "label": "Enable API server",
+        "description": "Accept transcription requests from devices on your network while Handy is running."
+      },
+      "port": {
+        "title": "Port",
+        "description": "The network port the server listens on."
+      },
+      "apiKey": {
+        "title": "API key",
+        "description": "Apps must send this key. Leave it empty to accept requests from any device on your network.",
+        "regenerate": "New key",
+        "emptyWarning": "No API key is set, so any device on your network can use this server."
+      },
+      "connect": {
+        "title": "Connect an App",
+        "running": "Listening on port {{port}}",
+        "starting": "Starting...",
+        "baseUrl": "Base URL",
+        "steps": {
+          "provider": "In your app, choose a custom (OpenAI-compatible) speech-to-text provider.",
+          "baseUrl": "Base URL: one of the addresses above. A name your local DNS resolves to this computer works too.",
+          "apiKey": "API key: the key above. Model: anything; Handy always uses its selected model."
+        },
+        "network": "The device must be on the same network as this computer. If your firewall asks whether Handy may accept connections, allow it on private networks."
+      },
+      "errors": {
+        "portInUse": "Port {{port}} is already in use by another program. Choose a different port.",
+        "portUnavailable": "Handy isn't allowed to use port {{port}}. Windows may reserve it for Hyper-V or WSL. Choose a different port.",
+        "failed": "The API server couldn't start: {{message}}",
+        "invalidPort": "Enter a port from 1 to 65535."
+      },
+      "copied": "Copied"
     },
     "debug": {
       "title": "Debug",
